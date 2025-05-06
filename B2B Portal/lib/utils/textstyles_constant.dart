@@ -52,4 +52,20 @@ class DashboardTextStyles {
     fontWeight: FontWeight.w600,
     color: DashboardColors.primaryWhite,
   );
+
+  // primary text 400
+  static const TextStyle primaryText400 = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 14,
+    fontWeight: FontWeight.w400,
+    color: DashboardColors.darkGrey,
+  );
+
+  // primary text 500
+  static const TextStyle primaryText500 = TextStyle(
+    fontFamily: fontFamily,
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+    color: DashboardColors.mediumGrey,
+  );
 }

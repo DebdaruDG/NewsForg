@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../color_palette.dart';
+import '../textstyles_constant.dart';
+
 /// A generic model adapter type that provides a way to access data from any model.
 typedef FieldAccessor<T> = String Function(T model);
 
@@ -84,18 +87,40 @@ class _GenericDataTableState<T> extends State<GenericDataTable<T>> {
             columns: [
               ...widget.columns.entries.mapIndexed(
                 (i, entry) => DataColumn(
-                  label: Text(entry.key),
+                  label: Text(
+                    entry.key,
+                    style: DashboardTextStyles.primaryText500.copyWith(
+                      fontSize: 14,
+                      color: DashboardColors.mediumGrey,
+                    ),
+                  ),
                   onSort: (colIndex, ascending) => _onSort(colIndex, ascending),
                 ),
               ),
-              const DataColumn(label: Text('Actions')),
+              DataColumn(
+                label: Text(
+                  'Actions',
+                  style: DashboardTextStyles.primaryText500.copyWith(
+                    fontSize: 14,
+                    color: DashboardColors.mediumGrey,
+                  ),
+                ),
+              ),
             ],
             rows:
                 _filteredData.map((model) {
                   return DataRow(
                     cells: [
                       ...widget.columns.values.map(
-                        (accessor) => DataCell(Text(accessor(model))),
+                        (accessor) => DataCell(
+                          Text(
+                            accessor(model),
+                            style: DashboardTextStyles.primaryText500.copyWith(
+                              fontSize: 14,
+                              color: DashboardColors.primaryBlack,
+                            ),
+                          ),
+                        ),
                       ),
                       DataCell(
                         Row(
