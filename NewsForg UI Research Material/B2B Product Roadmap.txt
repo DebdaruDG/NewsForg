@@ -1,0 +1,50 @@
+Roles :- 
+
+1. Admin / Account Manager.
+2. Editor / Content Creator.
+3. Content Strategist / Editorial Lead.
+
+--------------------------------------------------------------------------------
+
+1. Admin :- Create new users, assign roles, look into billing, Monitors activities by Overview and Audit Logs.
+
+
+2. Editor :- Create new articles, save it as draft, Submit it for review.
+
+
+3. Editorial Lead :- Review the Article of the editor, add comments, Approve or Reject the content. 
+
+-------------------------------------------------------------------
+
+Admin :- 
+
+A. Role Management
+
+	1. Create New Role 
+	2. Manage access like :- Permissions Content, 		 	Distribution, Compliance.
+
+B. User Management - Invite Users to add 
+C. Content
+D. Analytics
+E. Distribution
+
+
+Editor :- 
+
+1. Overview - Dashboard page basically.
+2. Content - Add / update / re-write contents, should have a custom typing area :- Bold, italic, etc.
+3. Media Upload - Add Images, Videos for proofs / attachments.
+4. Analytics - Drafts, Scheduled, Published.
+
+Editorial Lead :- 
+
+1. Overview - Dashboard page basically.
+2. Content
+3. Reviews
+4. Schedules - Only articles which are Reviewed and passed are to be sent to be published.
+
+Apart from this this also includes publication Schedule.
+
+5. Analytics - Pending Reviews, Breaking News Today, Scheduled posts, Team Reach.
+
+

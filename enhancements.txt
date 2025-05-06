@@ -1,0 +1,6 @@
+1. Logo and Favicon
+2. Login -> should redirect to the B2B enterprise application, having enquiries & business-listings.
+3. Join the Waitlist -> Collect user Data - email (mostly) - integrate Neon DB functionality.
+4. Deploy the API's on Neon DB.
+5. Work on the B2B application first.
+6. Work on the B2C application next.
