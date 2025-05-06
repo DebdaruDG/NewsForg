@@ -25,12 +25,12 @@ class SidebarItems {
     SidebarItemModel(
       icon: DashboardIcons.trade,
       label: 'Content',
-      screen: AppScreen.dashboard,
+      screen: AppScreen.content,
     ),
     SidebarItemModel(
       icon: DashboardIcons.earn,
       label: 'Reviews',
-      screen: AppScreen.dashboard,
+      screen: AppScreen.reviews,
     ),
     SidebarItemModel(
       icon: DashboardIcons.reports,
@@ -50,12 +50,12 @@ class SidebarItems {
     SidebarItemModel(
       icon: DashboardIcons.userManagement,
       label: 'User Management',
-      screen: AppScreen.dashboard,
+      screen: AppScreen.users,
     ),
     SidebarItemModel(
       icon: DashboardIcons.roleManagement,
       label: 'Role Management',
-      screen: AppScreen.dashboard,
+      screen: AppScreen.roleManagement,
     ),
   ];
 

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../model/sidebar_model.dart';
@@ -122,7 +124,7 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
                               if (_isSidebarExpanded)
                                 SizedBox(
                                   // Responsive width: 60% of Sidebar width
-                                  width: maxSidebarWidth * 0.75,
+                                  width: maxSidebarWidth * 0.25,
                                   height: 45,
                                   child: TextField(
                                     decoration: InputDecoration(
@@ -224,7 +226,6 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
           context,
         ).routerDelegate.currentConfiguration.uri.toString() ==
         screen.path;
-
     return ListTile(
       leading: Icon(
         icon,
@@ -246,7 +247,7 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
               )
               : null,
       onTap: () {
-        context.goNamed(screen.path);
+        context.goNamed(screen.name);
       },
       tileColor: isSelected ? DashboardColors.lightGrey : null,
     );
