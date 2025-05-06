@@ -14,6 +14,7 @@ class GenericDataTable<T> extends StatefulWidget {
   final ActionCallback<T>? onEdit;
   final ActionCallback<T>? onDelete;
   final ActionCallback<T>? onPublish;
+  final ActionCallback<T>? onTapEachRow;
   final String Function(T)? filterBy;
   final bool showExportButtons;
 
@@ -24,6 +25,7 @@ class GenericDataTable<T> extends StatefulWidget {
     this.onEdit,
     this.onDelete,
     this.onPublish,
+    this.onTapEachRow,
     this.filterBy,
     this.showExportButtons = true,
   });
@@ -103,25 +105,24 @@ class _GenericDataTableState<T> extends State<GenericDataTable<T>> {
                     ElevatedButton(
                       onPressed: () {},
                       style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.resolveWith<Color>((
-                              Set<MaterialState> states,
-                            ) {
-                              if (states.contains(MaterialState.pressed)) {
-                                return DashboardColors
-                                    .canvasBackground; // Color when pressed
-                              }
-                              if (states.contains(MaterialState.disabled)) {
-                                return DashboardColors
-                                    .lightGrey; // Color when disabled
-                              }
-                              if (states.contains(MaterialState.hovered)) {
-                                return DashboardColors
-                                    .canvasBackground; // Color when hovered
-                              }
+                        backgroundColor: WidgetStateProperty.resolveWith<Color>(
+                          (Set<WidgetState> states) {
+                            if (states.contains(WidgetState.pressed)) {
                               return DashboardColors
-                                  .cardBackground; // Default color
-                            }),
+                                  .canvasBackground; // Color when pressed
+                            }
+                            if (states.contains(WidgetState.disabled)) {
+                              return DashboardColors
+                                  .lightGrey; // Color when disabled
+                            }
+                            if (states.contains(WidgetState.hovered)) {
+                              return DashboardColors
+                                  .canvasBackground; // Color when hovered
+                            }
+                            return DashboardColors
+                                .cardBackground; // Default color
+                          },
+                        ),
                       ),
                       child: const Text('Export Excel'),
                     ),
@@ -181,6 +182,7 @@ class _GenericDataTableState<T> extends State<GenericDataTable<T>> {
                     cells: [
                       ...widget.columns.values.map(
                         (accessor) => DataCell(
+                          onTap: () => widget.onTapEachRow!(model),
                           Text(
                             accessor(model),
                             style: DashboardTextStyles.primaryText500.copyWith(

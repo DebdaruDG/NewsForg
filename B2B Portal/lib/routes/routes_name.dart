@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../screens/auth/forget_password.dart';
 import '../screens/auth/login.dart';
 import '../screens/auth/signup.dart';
+import '../screens/content/content_details.dart/content_details.dart';
 import '../screens/content/content_screen.dart';
 import '../screens/dashboard/dash_screen.dart';
 import '../screens/dashboard/dashboard_wrapper.dart';
@@ -20,6 +21,11 @@ enum AppScreen {
   ),
   dashboard(path: '/dashboard', name: 'dashboard', isAuth: false),
   content(path: '/content', name: 'content', isAuth: false),
+  contentDetails(
+    path: '/contentDetails',
+    name: 'contentDetails',
+    isAuth: false,
+  ),
   users(path: '/users', name: 'users', isAuth: false),
   roleManagement(
     path: '/roleManagement',
@@ -65,6 +71,9 @@ enum AppScreen {
         break;
       case AppScreen.reviews:
         screen = const DashboardScreen();
+        break;
+      case AppScreen.contentDetails:
+        screen = const ContentDetailsPage();
         break;
     }
     // Wrap non-auth screens with DashboardWrapper

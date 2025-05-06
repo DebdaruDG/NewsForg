@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:newsforg_b2b_portal/utils/color_palette.dart';
 
 import '../../model/content_model.dart';
+import '../../routes/routes_name.dart';
 import '../../utils/widgets/data_table.dart';
 
 class ContentScreen extends StatefulWidget {
@@ -37,6 +39,10 @@ class _ContentScreenState extends State<ContentScreen> {
             onEdit: (item) => debugPrint('Edit ${item.title}'),
             onDelete: (item) => debugPrint('Delete ${item.title}'),
             onPublish: (item) => debugPrint('Publish ${item.title}'),
+            onTapEachRow:
+                (item) => context.pushNamed(AppScreen.contentDetails.name),
+            // debugPrint('Title ${item.title}'),
+            // ContentDetailsPage
           ),
         ],
       ),
