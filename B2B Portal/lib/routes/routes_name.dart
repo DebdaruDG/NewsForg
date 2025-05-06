@@ -4,8 +4,11 @@ import 'package:flutter/material.dart';
 import '../screens/auth/forget_password.dart';
 import '../screens/auth/login.dart';
 import '../screens/auth/signup.dart';
+import '../screens/content/content_screen.dart';
 import '../screens/dashboard/dash_screen.dart';
 import '../screens/dashboard/dashboard_wrapper.dart';
+import '../screens/role_management/role_screen.dart';
+import '../screens/user_management/user_screen.dart';
 
 enum AppScreen {
   login(path: '/login', name: 'login', isAuth: true),
@@ -15,7 +18,15 @@ enum AppScreen {
     name: 'forget-password',
     isAuth: true,
   ),
-  dashboard(path: '/dashboard', name: 'dashboard', isAuth: false);
+  dashboard(path: '/dashboard', name: 'dashboard', isAuth: false),
+  content(path: '/content', name: 'content', isAuth: false),
+  users(path: '/users', name: 'users', isAuth: false),
+  roleManagement(
+    path: '/roleManagement',
+    name: 'roleManagement',
+    isAuth: false,
+  ),
+  reviews(path: '/reviews', name: 'reviews', isAuth: false);
 
   const AppScreen({
     required this.path,
@@ -41,6 +52,18 @@ enum AppScreen {
         screen = const ForgetPasswordScreen();
         break;
       case AppScreen.dashboard:
+        screen = const DashboardScreen();
+        break;
+      case AppScreen.content:
+        screen = const ContentScreen();
+        break;
+      case AppScreen.users:
+        screen = const UserScreen();
+        break;
+      case AppScreen.roleManagement:
+        screen = const RoleScreen();
+        break;
+      case AppScreen.reviews:
         screen = const DashboardScreen();
         break;
     }

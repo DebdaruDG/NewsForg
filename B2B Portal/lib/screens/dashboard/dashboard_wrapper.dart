@@ -246,7 +246,7 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
               )
               : null,
       onTap: () {
-        context.goNamed(screen.name);
+        context.goNamed(screen.path);
       },
       tileColor: isSelected ? DashboardColors.lightGrey : null,
     );
