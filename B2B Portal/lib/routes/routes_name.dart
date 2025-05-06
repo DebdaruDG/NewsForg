@@ -5,28 +5,46 @@ import '../screens/auth/forget_password.dart';
 import '../screens/auth/login.dart';
 import '../screens/auth/signup.dart';
 import '../screens/dashboard/dash_screen.dart';
+import '../screens/dashboard/dashboard_wrapper.dart';
 
 enum AppScreen {
-  login(path: '/login', name: 'login'),
-  signup(path: '/signup', name: 'signup'),
-  forgetPassword(path: '/forget-password', name: 'forget-password'),
-  dashboard(path: '/dashboard', name: 'dashboard');
+  login(path: '/login', name: 'login', isAuth: true),
+  signup(path: '/signup', name: 'signup', isAuth: true),
+  forgetPassword(
+    path: '/forget-password',
+    name: 'forget-password',
+    isAuth: true,
+  ),
+  dashboard(path: '/dashboard', name: 'dashboard', isAuth: false);
 
-  const AppScreen({required this.path, required this.name});
+  const AppScreen({
+    required this.path,
+    required this.name,
+    required this.isAuth,
+  });
 
   final String path;
   final String name;
+  final bool isAuth;
 
+  // Helper to get the widget for each screen
   Widget getScreen() {
+    Widget screen;
     switch (this) {
       case AppScreen.login:
-        return const LoginScreen();
+        screen = const LoginScreen();
+        break;
       case AppScreen.signup:
-        return const SignUpScreen();
+        screen = const SignUpScreen();
+        break;
       case AppScreen.forgetPassword:
-        return const ForgetPasswordScreen();
+        screen = const ForgetPasswordScreen();
+        break;
       case AppScreen.dashboard:
-        return const Dashboard();
+        screen = const Dashboard();
+        break;
     }
+    // Wrap non-auth screens with DashboardWrapper
+    return isAuth ? screen : DashboardWrapper(child: screen);
   }
 }

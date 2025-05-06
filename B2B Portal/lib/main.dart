@@ -12,11 +12,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'News CMS',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.grey),
-        fontFamily: 'Roboto', // Align with the UI kit's font
+        fontFamily: 'Roboto',
       ),
-      routerConfig: router, // Use the go_router configuration
+      routerConfig: router,
     );
   }
 }
