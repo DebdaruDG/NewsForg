@@ -41,7 +41,7 @@ enum AppScreen {
         screen = const ForgetPasswordScreen();
         break;
       case AppScreen.dashboard:
-        screen = const Dashboard();
+        screen = const DashboardScreen();
         break;
     }
     // Wrap non-auth screens with DashboardWrapper
