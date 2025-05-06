@@ -10,4 +10,5 @@ class DashboardColors {
   static const Color successGreen = Color(0xFF4CAF50);
   static const Color declineRed = Color(0xFFF44336);
   static const Color cardBackground = Color(0xFFF5F5F5);
+  static const Color canvasBackground = Color.fromARGB(255, 241, 248, 233);
 }
