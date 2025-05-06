@@ -16,4 +16,10 @@ class DashboardIcons {
   static const IconData declined = Icons.cancel_outlined;
   static const IconData trendingUp = Icons.arrow_upward;
   static const IconData trendingDown = Icons.arrow_downward;
+
+  // ✅ New icons for sidebar
+  static const IconData analytics = Icons.analytics_outlined;
+  static const IconData distribution = Icons.outbox_outlined;
+  static const IconData userManagement = Icons.group_outlined;
+  static const IconData roleManagement = Icons.admin_panel_settings_outlined;
 }

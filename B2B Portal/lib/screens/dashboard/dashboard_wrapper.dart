@@ -46,16 +46,19 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                // App logo and "Busy" label
+                // App logo and "PressPilot" label
                 Row(
                   children: [
                     const Icon(
-                      Icons.apps,
+                      Icons.explore_outlined,
                       color: DashboardColors.primaryBlack,
                       size: 24,
                     ),
                     const SizedBox(width: 8),
-                    Text('Busy', style: DashboardTextStyles.sectionHeader),
+                    Text(
+                      'PressPilot',
+                      style: DashboardTextStyles.sectionHeader,
+                    ),
                   ],
                 ),
                 // User actions

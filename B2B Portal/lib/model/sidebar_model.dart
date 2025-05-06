@@ -16,15 +16,6 @@ class SidebarItemModel {
 }
 
 class SidebarItems {
-  // 1. Overview
-  // 2. Content
-  // 3. Reviews
-  // 4. Schedules
-  // 5. Analytics
-  // 6. Distribution
-  // 7. User Management
-  // 8. Role Management
-
   static List<SidebarItemModel> get topSideBarItems => [
     SidebarItemModel(
       icon: DashboardIcons.home,
@@ -47,22 +38,22 @@ class SidebarItems {
       screen: AppScreen.dashboard,
     ),
     SidebarItemModel(
-      icon: DashboardIcons.rewards,
+      icon: DashboardIcons.analytics,
       label: 'Analytics',
       screen: AppScreen.dashboard,
     ),
     SidebarItemModel(
-      icon: DashboardIcons.rewards,
+      icon: DashboardIcons.distribution,
       label: 'Distribution',
       screen: AppScreen.dashboard,
     ),
     SidebarItemModel(
-      icon: DashboardIcons.rewards,
+      icon: DashboardIcons.userManagement,
       label: 'User Management',
       screen: AppScreen.dashboard,
     ),
     SidebarItemModel(
-      icon: DashboardIcons.rewards,
+      icon: DashboardIcons.roleManagement,
       label: 'Role Management',
       screen: AppScreen.dashboard,
     ),
