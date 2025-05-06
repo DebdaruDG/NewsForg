@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import '../../routes/routes_name.dart';
 import '../../utils/color_palette.dart';
 import '../../utils/textstyles_constant.dart';
 import 'auth_wrapper.dart';
-import 'login.dart';
 
 class ForgetPasswordScreen extends StatelessWidget {
   const ForgetPasswordScreen({super.key});
@@ -40,7 +41,10 @@ class ForgetPasswordScreen extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                // Add forget password logic here
+                context.goNamed(AppScreen.login.name); // Navigate using enum
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: DashboardColors.primaryBlack,
                 padding: const EdgeInsets.symmetric(vertical: 16),
@@ -59,10 +63,7 @@ class ForgetPasswordScreen extends StatelessWidget {
           Center(
             child: TextButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginScreen()),
-                );
+                context.goNamed(AppScreen.login.name); // Navigate using enum
               },
               child: Text(
                 'Back to Login',

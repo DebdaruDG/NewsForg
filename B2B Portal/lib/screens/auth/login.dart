@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import '../../routes/routes_name.dart';
 import '../../utils/color_palette.dart';
 import '../../utils/textstyles_constant.dart';
 import 'auth_wrapper.dart';
-import 'signup.dart';
-import 'forget_password.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -52,7 +52,12 @@ class LoginScreen extends StatelessWidget {
           SizedBox(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                // Add login logic here
+                context.goNamed(
+                  AppScreen.dashboard.name,
+                ); // Navigate using enum
+              },
               style: ElevatedButton.styleFrom(
                 backgroundColor: DashboardColors.primaryBlack,
                 padding: const EdgeInsets.symmetric(vertical: 16),
@@ -70,12 +75,7 @@ class LoginScreen extends StatelessWidget {
             children: [
               TextButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const SignUpScreen(),
-                    ),
-                  );
+                  context.goNamed(AppScreen.signup.name); // Navigate using enum
                 },
                 child: Text(
                   'Sign Up',
@@ -86,12 +86,9 @@ class LoginScreen extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ForgetPasswordScreen(),
-                    ),
-                  );
+                  context.goNamed(
+                    AppScreen.forgetPassword.name,
+                  ); // Navigate using enum
                 },
                 child: Text(
                   'Forget Password?',
