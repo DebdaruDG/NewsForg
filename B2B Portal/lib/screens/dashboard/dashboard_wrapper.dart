@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../model/sidebar_model.dart';
 import '../../routes/routes_name.dart';
 import '../../utils/color_palette.dart';
-import '../../utils/icon_constants.dart';
 import '../../utils/textstyles_constant.dart';
 
 class DashboardWrapper extends StatefulWidget {
@@ -25,6 +25,16 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
 
   @override
   Widget build(BuildContext context) {
+    final double screenWidth = MediaQuery.of(context).size.width;
+    const double mobileThreshold = 600;
+    final bool isMobile = screenWidth < mobileThreshold;
+
+    final double maxSidebarWidth = screenWidth * 0.2; // 3/10 of screen width
+    final double collapsedSidebarWidth = 80;
+    if (isMobile && _isSidebarExpanded) {
+      _isSidebarExpanded = false;
+    }
+
     return Scaffold(
       backgroundColor: DashboardColors.cardBackground, // Base canvas color
       body: Column(
@@ -48,7 +58,7 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
                     Text('Busy', style: DashboardTextStyles.sectionHeader),
                   ],
                 ),
-                // Search bar and user actions
+                // User actions
                 Row(
                   children: [
                     const SizedBox(width: 16),
@@ -81,7 +91,10 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
                   padding: const EdgeInsets.all(16),
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 300),
-                    width: _isSidebarExpanded ? 300 : 80,
+                    width:
+                        _isSidebarExpanded
+                            ? maxSidebarWidth
+                            : collapsedSidebarWidth,
                     decoration: BoxDecoration(
                       color:
                           DashboardColors
@@ -97,7 +110,7 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
                     ),
                     child: Column(
                       children: [
-                        // Sidebar header with toggle button
+                        // Sidebar header with search and toggle button
                         Padding(
                           padding: const EdgeInsets.all(16),
                           child: Row(
@@ -105,7 +118,9 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
                             children: [
                               if (_isSidebarExpanded)
                                 SizedBox(
-                                  width: 120,
+                                  // Responsive width: 60% of Sidebar width
+                                  width: maxSidebarWidth * 0.75,
+                                  height: 45,
                                   child: TextField(
                                     decoration: InputDecoration(
                                       hintText: 'Search',
@@ -131,6 +146,7 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
                                       ? Icons.arrow_left
                                       : Icons.arrow_right,
                                   color: DashboardColors.primaryBlack,
+                                  size: 18,
                                 ),
                                 onPressed: _toggleSidebar,
                               ),
@@ -141,56 +157,30 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
                           height: 1,
                           color: DashboardColors.lightGrey,
                         ),
-                        // Sidebar items
+                        // Sidebar items using ListView.builder
                         Expanded(
-                          child: ListView(
-                            children: [
-                              _buildSidebarItem(
+                          child: ListView.builder(
+                            itemCount: SidebarItems.topSideBarItems.length,
+                            itemBuilder: (context, index) {
+                              final item = SidebarItems.topSideBarItems[index];
+                              return _buildSidebarItem(
                                 context,
-                                icon: DashboardIcons.home,
-                                label: 'Home',
-                                screen: AppScreen.dashboard,
-                              ),
-                              _buildSidebarItem(
-                                context,
-                                icon: DashboardIcons.trade,
-                                label: 'Trade',
-                                screen: AppScreen.dashboard, // Placeholder
-                              ),
-                              _buildSidebarItem(
-                                context,
-                                icon: DashboardIcons.earn,
-                                label: 'Earn',
-                                screen: AppScreen.dashboard, // Placeholder
-                              ),
-                              _buildSidebarItem(
-                                context,
-                                icon: DashboardIcons.reports,
-                                label: 'Reporting',
-                                screen: AppScreen.dashboard, // Placeholder
-                              ),
-                              _buildSidebarItem(
-                                context,
-                                icon: DashboardIcons.rewards,
-                                label: 'Rewards',
-                                screen: AppScreen.dashboard, // Placeholder
-                              ),
-                            ],
+                                icon: item.icon,
+                                label: item.label,
+                                screen: item.screen,
+                              );
+                            },
                           ),
                         ),
-                        // Support and Settings at the bottom
-                        _buildSidebarItem(
-                          context,
-                          icon: DashboardIcons.support,
-                          label: 'Support',
-                          screen: AppScreen.dashboard, // Placeholder
-                        ),
-                        _buildSidebarItem(
-                          context,
-                          icon: DashboardIcons.settings,
-                          label: 'Settings',
-                          screen: AppScreen.dashboard, // Placeholder
-                        ),
+                        // Bottom Sidebar items (Support and Settings)
+                        ...SidebarItems.bottomSidebarItems.map((item) {
+                          return _buildSidebarItem(
+                            context,
+                            icon: item.icon,
+                            label: item.label,
+                            screen: item.screen,
+                          );
+                        }),
                       ],
                     ),
                   ),
@@ -226,8 +216,11 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
     required String label,
     required AppScreen screen,
   }) {
-    final bool isSelected = false;
-    // GoRouter.of(context).location == screen.path;
+    final bool isSelected =
+        GoRouter.of(
+          context,
+        ).routerDelegate.currentConfiguration.uri.toString() ==
+        screen.path;
 
     return ListTile(
       leading: Icon(
