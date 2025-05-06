@@ -15,6 +15,7 @@ class GenericDataTable<T> extends StatefulWidget {
   final ActionCallback<T>? onDelete;
   final ActionCallback<T>? onPublish;
   final String Function(T)? filterBy;
+  final bool showExportButtons;
 
   const GenericDataTable({
     super.key,
@@ -24,6 +25,7 @@ class GenericDataTable<T> extends StatefulWidget {
     this.onDelete,
     this.onPublish,
     this.filterBy,
+    this.showExportButtons = true,
   });
 
   @override
@@ -65,20 +67,86 @@ class _GenericDataTableState<T> extends State<GenericDataTable<T>> {
     return Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: TextField(
-            decoration: const InputDecoration(
-              hintText: 'Search...',
-              prefixIcon: Icon(Icons.search),
-              border: OutlineInputBorder(),
-            ),
-            onChanged: (value) {
-              setState(() {
-                _searchQuery = value;
-              });
-            },
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              if (widget.showExportButtons)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ButtonStyle(
+                        backgroundColor: WidgetStateProperty.resolveWith<Color>(
+                          (Set<WidgetState> states) {
+                            if (states.contains(WidgetState.pressed)) {
+                              return DashboardColors
+                                  .canvasBackground; // Color when pressed
+                            }
+                            if (states.contains(WidgetState.disabled)) {
+                              return DashboardColors
+                                  .lightGrey; // Color when disabled
+                            }
+                            if (states.contains(WidgetState.hovered)) {
+                              return DashboardColors
+                                  .canvasBackground; // Color when hovered
+                            }
+                            return DashboardColors
+                                .cardBackground; // Default color
+                          },
+                        ),
+                      ),
+                      child: const Text('Export PDF'),
+                    ),
+                    const SizedBox(width: 8),
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.resolveWith<Color>((
+                              Set<MaterialState> states,
+                            ) {
+                              if (states.contains(MaterialState.pressed)) {
+                                return DashboardColors
+                                    .canvasBackground; // Color when pressed
+                              }
+                              if (states.contains(MaterialState.disabled)) {
+                                return DashboardColors
+                                    .lightGrey; // Color when disabled
+                              }
+                              if (states.contains(MaterialState.hovered)) {
+                                return DashboardColors
+                                    .canvasBackground; // Color when hovered
+                              }
+                              return DashboardColors
+                                  .cardBackground; // Default color
+                            }),
+                      ),
+                      child: const Text('Export Excel'),
+                    ),
+                    const SizedBox(width: 8),
+                  ],
+                ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.1,
+                child: TextField(
+                  decoration: const InputDecoration(
+                    hintText: 'Search...',
+                    prefixIcon: Icon(Icons.search),
+                    border: OutlineInputBorder(),
+                  ),
+                  onChanged: (value) {
+                    setState(() {
+                      _searchQuery = value;
+                    });
+                  },
+                ),
+              ),
+            ],
           ),
         ),
+
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: DataTable(
