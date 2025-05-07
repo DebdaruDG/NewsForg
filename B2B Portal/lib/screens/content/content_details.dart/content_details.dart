@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../utils/color_palette.dart';
+
 class ContentDetailsPage extends StatelessWidget {
   const ContentDetailsPage({super.key});
 
@@ -13,91 +15,90 @@ class ContentDetailsPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 2 / 3,
-            child: Column(
-              children: [
-                _appbar(context, "Exploring the Night Sky", "Published"),
-                Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    children: [
-                      // Media Attachments
-                      SizedBox(
-                        height: 80,
-                        child: ListView(
-                          scrollDirection: Axis.horizontal,
-                          children: [
-                            _mediaBox("https://placehold.co/600x400"),
-                            const SizedBox(width: 8),
-                            _mediaBox("https://placehold.co/600x400"),
-                            const SizedBox(width: 8),
-                            _mediaBox("https://placehold.co/600x400"),
-                            const SizedBox(width: 8),
-                            _moreMediaBox("+3 more"),
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 24),
-
-                      // Description
-                      Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.circular(12),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.black12,
-                              blurRadius: 6,
-                              offset: Offset(0, 2),
-                            ),
-                          ],
-                        ),
-                        child: const Text(
-                          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
-                          "Vestibulum nec odio ipsum. Suspendisse cursus malesuada facilisis. "
-                          "Nunc consectetur facilisis tincidunt. Proin a leo nisi. Vivamus non convallis est.",
-                          style: TextStyle(fontSize: 16),
-                        ),
-                      ),
-
-                      Container(width: 1, color: Colors.grey[300]),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
           Expanded(
             child: SizedBox(
-              width: MediaQuery.of(context).size.width * 1 / 3,
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Comments",
-                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
+              width: MediaQuery.of(context).size.width * 4 / 5,
+              child: Column(
+                children: [
+                  _appbar(context, "Exploring the Night Sky", "Published"),
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      children: [
+                        // Media Attachments
+                        SizedBox(
+                          height: 80,
+                          child: ListView(
+                            scrollDirection: Axis.horizontal,
+                            children: [
+                              _mediaBox("https://placehold.co/600x400"),
+                              const SizedBox(width: 8),
+                              _mediaBox("https://placehold.co/600x400"),
+                              const SizedBox(width: 8),
+                              _mediaBox("https://placehold.co/600x400"),
+                              const SizedBox(width: 8),
+                              _moreMediaBox("+3 more"),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+
+                        // Description
+                        Container(
+                          padding: const EdgeInsets.all(16),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(12),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.black12,
+                                blurRadius: 6,
+                                offset: Offset(0, 2),
+                              ),
+                            ],
+                          ),
+                          child: const Text(
+                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+                            "Vestibulum nec odio ipsum. Suspendisse cursus malesuada facilisis. "
+                            "Nunc consectetur facilisis tincidunt. Proin a leo nisi. Vivamus non convallis est.",
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ),
+                      ],
                     ),
-                    const SizedBox(height: 16),
-                    _commentItem(
-                      "Alice",
-                      "This content is really insightful!",
-                      "2 hours ago",
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Container(width: 1, color: Colors.grey[300]),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 1 / 5,
+            child: Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Comments",
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
                     ),
-                    const SizedBox(height: 16),
-                    _commentItem(
-                      "Bob",
-                      "Loved the breakdown of each concept.",
-                      "5 hours ago",
-                    ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: 16),
+                  _commentItem(
+                    "Alice",
+                    "This content is really insightful!",
+                    "2 hours ago",
+                  ),
+                  const SizedBox(height: 16),
+                  _commentItem(
+                    "Bob",
+                    "Loved the breakdown of each concept.",
+                    "5 hours ago",
+                  ),
+                ],
               ),
             ),
           ),
@@ -152,6 +153,13 @@ class ContentDetailsPage extends StatelessWidget {
   }
 
   Widget _appbar(BuildContext context, String title, String status) => AppBar(
+    backgroundColor: DashboardColors.primaryWhite,
+    actionsPadding: const EdgeInsets.all(6),
+    elevation: 0,
+    // decoration: BoxDecoration(
+    //     color: DashboardColors.primaryWhite,
+    //     borderRadius: BorderRadius.all(Radius.circular(14)),
+    //   ),
     title: Text(
       title,
       style: Theme.of(
