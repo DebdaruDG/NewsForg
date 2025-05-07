@@ -35,17 +35,17 @@ class SidebarItems {
     SidebarItemModel(
       icon: DashboardIcons.reports,
       label: 'Schedules',
-      screen: AppScreen.dashboard,
+      screen: AppScreen.schedules,
     ),
     SidebarItemModel(
       icon: DashboardIcons.analytics,
       label: 'Analytics',
-      screen: AppScreen.dashboard,
+      screen: AppScreen.analytics,
     ),
     SidebarItemModel(
       icon: DashboardIcons.distribution,
       label: 'Distribution',
-      screen: AppScreen.dashboard,
+      screen: AppScreen.distribution,
     ),
     SidebarItemModel(
       icon: DashboardIcons.userManagement,

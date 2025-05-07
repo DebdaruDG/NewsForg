@@ -1,6 +1,7 @@
 // Enum to define allowed screens with their route paths and names
 import 'package:flutter/material.dart';
 
+import '../screens/analytics/analytics_screen.dart';
 import '../screens/auth/forget_password.dart';
 import '../screens/auth/login.dart';
 import '../screens/auth/signup.dart';
@@ -8,7 +9,10 @@ import '../screens/content/content_details.dart/content_details.dart';
 import '../screens/content/content_screen.dart';
 import '../screens/dashboard/dash_screen.dart';
 import '../screens/dashboard/dashboard_wrapper.dart';
+import '../screens/distribution/distribution_screen.dart';
+import '../screens/review/reviews_screen.dart';
 import '../screens/role_management/role_screen.dart';
+import '../screens/schedules/schedule_screen.dart';
 import '../screens/user_management/user_screen.dart';
 
 enum AppScreen {
@@ -26,13 +30,16 @@ enum AppScreen {
     name: 'contentDetails',
     isAuth: false,
   ),
+  reviews(path: '/reviews', name: 'reviews', isAuth: false),
+  schedules(path: '/schedules', name: 'schedules', isAuth: false),
+  analytics(path: '/analytics', name: 'analytics', isAuth: false),
+  distribution(path: '/distribution', name: 'distribution', isAuth: false),
   users(path: '/users', name: 'users', isAuth: false),
   roleManagement(
     path: '/roleManagement',
     name: 'roleManagement',
     isAuth: false,
-  ),
-  reviews(path: '/reviews', name: 'reviews', isAuth: false);
+  );
 
   const AppScreen({
     required this.path,
@@ -48,6 +55,7 @@ enum AppScreen {
   Widget getScreen() {
     Widget screen;
     switch (this) {
+      // Authorization Screens
       case AppScreen.login:
         screen = const LoginScreen();
         break;
@@ -57,23 +65,33 @@ enum AppScreen {
       case AppScreen.forgetPassword:
         screen = const ForgetPasswordScreen();
         break;
+      // SideBar Screens
       case AppScreen.dashboard:
         screen = const DashboardScreen();
         break;
       case AppScreen.content:
         screen = const ContentScreen();
         break;
+      case AppScreen.contentDetails:
+        screen = const ContentDetailsPage();
+        break;
+      case AppScreen.schedules:
+        screen = const ScheduleScreen();
+        break;
+      case AppScreen.analytics:
+        screen = const AnalyticsScreen();
+        break;
+      case AppScreen.distribution:
+        screen = const DistributionScreen();
+        break;
+      case AppScreen.reviews:
+        screen = const ReviewScreen();
+        break;
       case AppScreen.users:
         screen = const UserScreen();
         break;
       case AppScreen.roleManagement:
         screen = const RoleScreen();
-        break;
-      case AppScreen.reviews:
-        screen = const DashboardScreen();
-        break;
-      case AppScreen.contentDetails:
-        screen = const ContentDetailsPage();
         break;
     }
     // Wrap non-auth screens with DashboardWrapper

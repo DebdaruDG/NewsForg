@@ -166,6 +166,8 @@ class ContentDetailsPage extends StatelessWidget {
         color: DashboardColors.primaryWhite,
         borderRadius: const BorderRadius.all(Radius.circular(14)),
       ),
+      margin: const EdgeInsets.all(12),
+      padding: const EdgeInsets.all(4),
       child: AppBar(
         backgroundColor: Colors.transparent,
         actionsPadding: const EdgeInsets.all(6),
