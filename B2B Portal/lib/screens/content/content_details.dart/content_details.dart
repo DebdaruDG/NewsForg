@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:newsforg_b2b_portal/utils/textstyles_constant.dart';
 
 import '../../../utils/color_palette.dart';
+import '../../../utils/widgets/generic_pop_up.dart';
 
 class ContentDetailsPage extends StatelessWidget {
   const ContentDetailsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey _popupIconKey = GlobalKey();
+
     return Container(
       color: Colors.grey[100],
       width: MediaQuery.of(context).size.width,
@@ -20,7 +24,12 @@ class ContentDetailsPage extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 4 / 5,
               child: Column(
                 children: [
-                  _appbar(context, "Exploring the Night Sky", "Published"),
+                  _appbar(
+                    context,
+                    "Exploring the Night Sky",
+                    "Published",
+                    popUpKey: _popupIconKey,
+                  ),
                   Padding(
                     padding: const EdgeInsets.all(16),
                     child: Column(
@@ -152,28 +161,66 @@ class ContentDetailsPage extends StatelessWidget {
     );
   }
 
-  Widget _appbar(BuildContext context, String title, String status) => AppBar(
-    backgroundColor: DashboardColors.primaryWhite,
-    actionsPadding: const EdgeInsets.all(6),
-    elevation: 0,
-    // decoration: BoxDecoration(
-    //     color: DashboardColors.primaryWhite,
-    //     borderRadius: BorderRadius.all(Radius.circular(14)),
-    //   ),
-    title: Text(
-      title,
-      style: Theme.of(
-        context,
-      ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+  Widget _appbar(
+    BuildContext context,
+    String title,
+    String status, {
+    GlobalKey<State<StatefulWidget>>? popUpKey,
+  }) => PreferredSize(
+    preferredSize: const Size.fromHeight(kToolbarHeight),
+    child: Container(
+      decoration: BoxDecoration(
+        color: DashboardColors.primaryWhite,
+        borderRadius: const BorderRadius.all(Radius.circular(14)),
+      ),
+      child: AppBar(
+        backgroundColor: Colors.transparent,
+        actionsPadding: const EdgeInsets.all(6),
+        elevation: 0,
+        title: Text(
+          title,
+          style: Theme.of(
+            context,
+          ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+        ),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () => Navigator.pop(context),
+        ),
+        actions: [
+          Chip(label: Text(status), backgroundColor: Colors.green.shade100),
+          const SizedBox(width: 8),
+          if (popUpKey != null)
+            MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: GestureDetector(
+                key: popUpKey,
+                onTap:
+                    () => GenericPopupMenu.show(
+                      context: context,
+                      iconKey: popUpKey,
+                      contentWidgets: [
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            "Edit",
+                            style: DashboardTextStyles.primaryText400,
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            "Change Status",
+                            style: DashboardTextStyles.primaryText400,
+                          ),
+                        ),
+                      ],
+                    ),
+                child: const Icon(Icons.more_vert),
+              ),
+            ),
+        ],
+      ),
     ),
-    leading: IconButton(
-      icon: const Icon(Icons.arrow_back),
-      onPressed: () => Navigator.pop(context),
-    ),
-    actions: [
-      Chip(label: Text(status), backgroundColor: Colors.green.shade100),
-      const SizedBox(width: 8),
-      const Icon(Icons.more_vert),
-    ],
   );
 }
