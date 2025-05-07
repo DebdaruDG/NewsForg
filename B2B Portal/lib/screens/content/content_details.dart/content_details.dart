@@ -40,11 +40,11 @@ class ContentDetailsPage extends StatelessWidget {
                           child: ListView(
                             scrollDirection: Axis.horizontal,
                             children: [
-                              _mediaBox("https://placehold.co/600x400"),
+                              _mediaBox("assets/images/content_img_01.jpg"),
                               const SizedBox(width: 8),
-                              _mediaBox("https://placehold.co/600x400"),
+                              _mediaBox("assets/images/content_img_02.jpg"),
                               const SizedBox(width: 8),
-                              _mediaBox("https://placehold.co/600x400"),
+                              _mediaBox("assets/images/content_img_03.jpg"),
                               const SizedBox(width: 8),
                               _moreMediaBox("+3 more"),
                             ],
@@ -58,13 +58,6 @@ class ContentDetailsPage extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(12),
-                            boxShadow: const [
-                              BoxShadow(
-                                color: Colors.black12,
-                                blurRadius: 6,
-                                offset: Offset(0, 2),
-                              ),
-                            ],
                           ),
                           child: const Text(
                             "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
@@ -119,7 +112,7 @@ class ContentDetailsPage extends StatelessWidget {
   Widget _mediaBox(String imageUrl) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(8),
-      child: Image.network(imageUrl, width: 80, height: 80, fit: BoxFit.cover),
+      child: Image.asset(imageUrl, width: 80, height: 80, fit: BoxFit.cover),
     );
   }
 
