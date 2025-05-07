@@ -109,7 +109,7 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
     double maxSidebarWidth,
     double collapsedSidebarWidth,
   ) => AnimatedContainer(
-    duration: const Duration(milliseconds: 300),
+    duration: const Duration(milliseconds: 500),
     width: _isSidebarExpanded ? maxSidebarWidth : collapsedSidebarWidth,
     decoration: BoxDecoration(
       color: DashboardColors.primaryWhite, // White inner background
@@ -126,31 +126,33 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
       children: [
         // Sidebar header with search and toggle button
         Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               if (_isSidebarExpanded)
-                SizedBox(
-                  // Responsive width: 60% of Sidebar width
-                  width: maxSidebarWidth * 0.25,
-                  height: 45,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: 'Search',
-                      hintStyle: DashboardTextStyles.labelSmall,
-                      prefixIcon: const Icon(
-                        Icons.search,
-                        color: DashboardColors.mediumGrey,
-                      ),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: const BorderSide(
-                          color: DashboardColors.lightGrey,
+                Expanded(
+                  child: SizedBox(
+                    // Responsive width: 60% of Sidebar width
+                    width: maxSidebarWidth * 0.75,
+                    height: 45,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        hintText: 'Search',
+                        hintStyle: DashboardTextStyles.labelSmall,
+                        prefixIcon: const Icon(
+                          Icons.search,
+                          color: DashboardColors.mediumGrey,
                         ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
+                          borderSide: const BorderSide(
+                            color: DashboardColors.lightGrey,
+                          ),
+                        ),
+                        filled: true,
+                        fillColor: DashboardColors.primaryWhite,
                       ),
-                      filled: true,
-                      fillColor: DashboardColors.primaryWhite,
                     ),
                   ),
                 ),
@@ -158,7 +160,7 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
                 icon: Icon(
                   _isSidebarExpanded ? Icons.arrow_left : Icons.arrow_right,
                   color: DashboardColors.primaryBlack,
-                  size: 18,
+                  size: 24,
                 ),
                 onPressed: _toggleSidebar,
               ),
