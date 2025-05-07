@@ -8,6 +8,7 @@ class ContentDetailsPage extends StatelessWidget {
     return Container(
       color: Colors.grey[100],
       width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -68,31 +69,35 @@ class ContentDetailsPage extends StatelessWidget {
               ],
             ),
           ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 1 / 3,
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                children: [
-                  Text(
-                    "Comments",
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
+          Expanded(
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 1 / 3,
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Comments",
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 16),
-                  _commentItem(
-                    "Alice",
-                    "This content is really insightful!",
-                    "2 hours ago",
-                  ),
-                  const SizedBox(height: 16),
-                  _commentItem(
-                    "Bob",
-                    "Loved the breakdown of each concept.",
-                    "5 hours ago",
-                  ),
-                ],
+                    const SizedBox(height: 16),
+                    _commentItem(
+                      "Alice",
+                      "This content is really insightful!",
+                      "2 hours ago",
+                    ),
+                    const SizedBox(height: 16),
+                    _commentItem(
+                      "Bob",
+                      "Loved the breakdown of each concept.",
+                      "5 hours ago",
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

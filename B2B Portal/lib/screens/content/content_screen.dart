@@ -18,6 +18,7 @@ class _ContentScreenState extends State<ContentScreen> {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(16),
+      height: MediaQuery.of(context).size.height,
       decoration: BoxDecoration(
         color: DashboardColors.primaryWhite,
         borderRadius: BorderRadius.all(Radius.circular(14)),
@@ -41,8 +42,6 @@ class _ContentScreenState extends State<ContentScreen> {
             onPublish: (item) => debugPrint('Publish ${item.title}'),
             onTapEachRow:
                 (item) => context.pushNamed(AppScreen.contentDetails.name),
-            // debugPrint('Title ${item.title}'),
-            // ContentDetailsPage
           ),
         ],
       ),
