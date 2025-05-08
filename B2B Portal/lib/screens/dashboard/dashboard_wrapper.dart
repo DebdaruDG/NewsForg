@@ -1,11 +1,10 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../model/sidebar_model.dart';
 import '../../routes/routes_name.dart';
 import '../../utils/color_palette.dart';
 import '../../utils/textstyles_constant.dart';
+import '../../utils/widgets/generic_pop_up.dart';
 
 class DashboardWrapper extends StatefulWidget {
   final Widget child;
@@ -37,12 +36,14 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
       _isSidebarExpanded = false;
     }
 
+    final GlobalKey popupIconKey = GlobalKey();
+
     return Scaffold(
       backgroundColor: DashboardColors.cardBackground, // Base canvas color
       body: Column(
         children: [
           // Navbar
-          _navBar,
+          _navBar(popupIconKey),
           // Main layout with Sidebar and Content
           Expanded(
             child: Row(
@@ -65,7 +66,7 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
     );
   }
 
-  Widget get _navBar => Container(
+  Widget _navBar(GlobalKey<State<StatefulWidget>> popUpKey) => Container(
     padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
     color: DashboardColors.cardBackground,
     child: Row(
@@ -86,14 +87,31 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
         // User actions
         Row(
           children: [
-            const SizedBox(width: 16),
-            IconButton(
-              icon: const Icon(
-                Icons.notifications_outlined,
-                color: DashboardColors.primaryBlack,
+            MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: GestureDetector(
+                key: popUpKey,
+                onTap:
+                    () => GenericPopupMenu.show(
+                      context: context,
+                      iconKey: popUpKey,
+                      contentWidgets: [
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            "Edit",
+                            style: DashboardTextStyles.primaryText400,
+                          ),
+                        ),
+                      ],
+                    ),
+                child: const Icon(
+                  Icons.notifications_outlined,
+                  color: DashboardColors.primaryBlack,
+                ),
               ),
-              onPressed: () {},
             ),
+            const SizedBox(width: 16),
             const CircleAvatar(
               radius: 16,
               backgroundColor: DashboardColors.lightGrey,

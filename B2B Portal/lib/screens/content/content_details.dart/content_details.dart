@@ -9,7 +9,7 @@ class ContentDetailsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey _popupIconKey = GlobalKey();
+    final GlobalKey popupIconKey = GlobalKey();
 
     return Container(
       color: Colors.grey[100],
@@ -28,7 +28,7 @@ class ContentDetailsPage extends StatelessWidget {
                     context,
                     "Exploring the Night Sky",
                     "Published",
-                    popUpKey: _popupIconKey,
+                    popUpKey: popupIconKey,
                   ),
                   Padding(
                     padding: const EdgeInsets.all(16),

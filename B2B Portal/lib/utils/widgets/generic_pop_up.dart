@@ -15,7 +15,6 @@ class GenericPopupMenu extends StatefulWidget {
   @override
   State<GenericPopupMenu> createState() => _GenericPopupMenuState();
 
-  // Store entries statically
   static OverlayEntry? _popupEntry;
   static OverlayEntry? _backdropEntry;
 
@@ -25,59 +24,77 @@ class GenericPopupMenu extends StatefulWidget {
     List<Widget>? contentWidgets,
     double width = 200,
     double height = 150,
+    VoidCallback? onClose,
   }) {
-    // If already showing, remove both
+    // Toggle popup
     if (_popupEntry != null) {
-      _removeEntries();
+      _removeEntries(onClose: onClose);
       return;
     }
 
-    final overlay = Overlay.of(context);
+    final overlay = Overlay.maybeOf(context);
+    if (overlay == null) return;
+
     final renderBox = iconKey.currentContext?.findRenderObject() as RenderBox?;
     final overlayBox = overlay.context.findRenderObject() as RenderBox?;
 
-    if (renderBox != null && overlayBox != null) {
-      final position = renderBox.localToGlobal(
-        Offset.zero,
-        ancestor: overlayBox,
-      );
-      final size = renderBox.size;
+    if (renderBox == null || overlayBox == null) return;
 
-      _popupEntry = OverlayEntry(
-        builder:
-            (_) => Positioned(
-              left: position.dx,
-              top: position.dy + size.height + 5,
-              child: Material(
-                color: Colors.transparent,
-                child: GenericPopupMenu(
-                  contentWidgets: contentWidgets,
-                  width: width,
-                  height: height,
-                ),
+    final position = renderBox.localToGlobal(Offset.zero, ancestor: overlayBox);
+    final size = renderBox.size;
+    final screenSize = overlayBox.size;
+
+    // Adjust position if popup overflows screen
+    double left = position.dx;
+    double top = position.dy + size.height + 5;
+
+    if (left + width > screenSize.width) {
+      left = screenSize.width - width - 10; // adjust right
+    }
+
+    if (top + height > screenSize.height) {
+      top = position.dy - height - 5; // show above if overflow below
+    }
+
+    _popupEntry = OverlayEntry(
+      builder:
+          (_) => Positioned(
+            left: left,
+            top: top,
+            child: Material(
+              color: Colors.transparent,
+              child: GenericPopupMenu(
+                contentWidgets: contentWidgets,
+                width: width,
+                height: height,
               ),
             ),
-      );
+          ),
+    );
 
-      _backdropEntry = OverlayEntry(
-        builder:
-            (_) => GestureDetector(
-              behavior: HitTestBehavior.translucent,
-              onTap: () => _removeEntries(),
-              child: Container(color: Colors.transparent),
+    _backdropEntry = OverlayEntry(
+      builder:
+          (_) => GestureDetector(
+            behavior: HitTestBehavior.translucent,
+            onTap: () => _removeEntries(onClose: onClose),
+            child: Container(
+              width: screenSize.width,
+              height: screenSize.height,
+              color: Colors.transparent,
             ),
-      );
+          ),
+    );
 
-      overlay.insert(_backdropEntry!);
-      overlay.insert(_popupEntry!);
-    }
+    overlay.insert(_backdropEntry!); // behind
+    overlay.insert(_popupEntry!); // above
   }
 
-  static void _removeEntries() {
+  static void _removeEntries({VoidCallback? onClose}) {
     _popupEntry?.remove();
     _backdropEntry?.remove();
     _popupEntry = null;
     _backdropEntry = null;
+    onClose?.call();
   }
 }
 
