@@ -144,47 +144,63 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
       children: [
         // Sidebar header with search and toggle button
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+          child: Column(
             children: [
-              if (_isSidebarExpanded)
-                Expanded(
-                  child: SizedBox(
-                    // Responsive width: 60% of Sidebar width
-                    width: maxSidebarWidth * 0.75,
-                    height: 45,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        hintText: 'Search',
-                        hintStyle: DashboardTextStyles.labelSmall,
-                        prefixIcon: const Icon(
-                          Icons.search,
-                          color: DashboardColors.mediumGrey,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          borderSide: const BorderSide(
-                            color: DashboardColors.lightGrey,
+              Row(
+                mainAxisAlignment:
+                    _isSidebarExpanded
+                        ? MainAxisAlignment.end
+                        : MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  IconButton(
+                    icon: Icon(
+                      _isSidebarExpanded
+                          ? Icons.keyboard_double_arrow_left_sharp
+                          : Icons.keyboard_double_arrow_right_sharp,
+                      color: DashboardColors.primaryBlack,
+                      size: 24,
+                    ),
+                    onPressed: _toggleSidebar,
+                  ),
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  if (_isSidebarExpanded)
+                    Expanded(
+                      child: SizedBox(
+                        // Responsive width: 60% of Sidebar width
+                        width: maxSidebarWidth * 0.9,
+                        height: 45,
+                        child: TextField(
+                          decoration: InputDecoration(
+                            hintText: 'Search',
+                            hintStyle: DashboardTextStyles.labelSmall,
+                            prefixIcon: const Icon(
+                              Icons.search,
+                              color: DashboardColors.mediumGrey,
+                            ),
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8),
+                              borderSide: const BorderSide(
+                                color: DashboardColors.lightGrey,
+                              ),
+                            ),
+                            filled: true,
+                            fillColor: DashboardColors.primaryWhite,
                           ),
                         ),
-                        filled: true,
-                        fillColor: DashboardColors.primaryWhite,
                       ),
                     ),
-                  ),
-                ),
-              IconButton(
-                icon: Icon(
-                  _isSidebarExpanded ? Icons.arrow_left : Icons.arrow_right,
-                  color: DashboardColors.primaryBlack,
-                  size: 24,
-                ),
-                onPressed: _toggleSidebar,
+                ],
               ),
             ],
           ),
         ),
+        const SizedBox(height: 12),
         const Divider(height: 1, color: DashboardColors.lightGrey),
         // Sidebar items using ListView.builder
         Expanded(
