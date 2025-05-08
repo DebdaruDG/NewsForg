@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../utils/color_palette.dart';
 import '../../utils/textstyles_constant.dart';
 
@@ -12,59 +11,85 @@ class AuthWrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Stack(
-        children: [
-          // Background image
-          Container(
-            decoration: const BoxDecoration(
-              image: DecorationImage(
-                image: AssetImage(
-                  'assets/background.jpg',
-                ), // Replace with your background image
-                fit: BoxFit.cover,
-              ),
-            ),
+      backgroundColor: DashboardColors.cardBackground,
+      body: Container(
+        margin: const EdgeInsets.all(36),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(24)),
+        child: Container(
+          decoration: const BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(24)),
+            color: DashboardColors.primaryWhite,
           ),
-          // Semi-transparent overlay
-          Container(color: DashboardColors.primaryBlack.withOpacity(0.5)),
-          // Centered card for the form
-          Center(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    // Title
-                    Text(
-                      title,
-                      style: DashboardTextStyles.sectionHeader.copyWith(
-                        color: DashboardColors.primaryWhite,
-                      ),
+          child: Row(
+            children: [
+              // Left side: Background image
+              Expanded(
+                flex: 1,
+                child: Container(
+                  margin: const EdgeInsets.all(12),
+                  decoration: const BoxDecoration(
+                    color: DashboardColors.canvasBackground,
+                    borderRadius: BorderRadius.all(Radius.circular(24)),
+                    image: DecorationImage(
+                      image: AssetImage(
+                        'assets/auth_image.jpg',
+                      ), // Replace with your image
+                      fit: BoxFit.cover,
                     ),
-                    const SizedBox(height: 24),
-                    // Form card
-                    Container(
-                      padding: const EdgeInsets.all(24.0),
-                      decoration: BoxDecoration(
-                        color: DashboardColors.primaryWhite,
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: DashboardColors.darkGrey.withOpacity(0.2),
-                            blurRadius: 8,
-                            offset: const Offset(0, 4),
-                          ),
-                        ],
-                      ),
-                      child: child,
-                    ),
-                  ],
+                  ),
                 ),
               ),
-            ),
+              // Right side: Authentication content
+              Expanded(
+                flex: 1,
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: DashboardColors.primaryWhite,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(24),
+                      bottomRight: Radius.circular(24),
+                    ),
+                  ),
+                  child: Center(
+                    child: SingleChildScrollView(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 40.0,
+                          vertical: 24.0,
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Title
+                            Text(
+                              title,
+                              style: DashboardTextStyles.sectionHeader.copyWith(
+                                color: DashboardColors.primaryBlack,
+                                fontSize: 32,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              'Enter your email and password',
+                              style: DashboardTextStyles.labelSmall.copyWith(
+                                color: DashboardColors.mediumGrey,
+                              ),
+                            ),
+                            const SizedBox(height: 24),
+                            // Form content
+                            child,
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
