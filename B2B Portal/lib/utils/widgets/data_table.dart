@@ -147,81 +147,92 @@ class _GenericDataTableState<T> extends State<GenericDataTable<T>> {
             ],
           ),
         ),
-
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
-          child: DataTable(
-            sortColumnIndex: _sortColumnIndex,
-            sortAscending: _isAscending,
-            columns: [
-              ...widget.columns.entries.mapIndexed(
-                (i, entry) => DataColumn(
+          child: Container(
+            decoration: BoxDecoration(
+              color: DashboardColors.primaryBlack, // Header bg color
+            ),
+            child: DataTable(
+              sortColumnIndex: _sortColumnIndex,
+              sortAscending: _isAscending,
+              headingRowColor: WidgetStateProperty.all(Colors.transparent),
+              dataRowColor: WidgetStateProperty.all(
+                DashboardColors.cardBackground,
+              ),
+              columns: [
+                ...widget.columns.entries.mapIndexed(
+                  (i, entry) => DataColumn(
+                    label: Text(
+                      entry.key,
+                      style: DashboardTextStyles.primaryText500.copyWith(
+                        fontSize: 14,
+                        color: DashboardColors.primaryWhite,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    onSort:
+                        (colIndex, ascending) => _onSort(colIndex, ascending),
+                  ),
+                ),
+                DataColumn(
                   label: Text(
-                    entry.key,
+                    'Actions',
                     style: DashboardTextStyles.primaryText500.copyWith(
                       fontSize: 14,
                       color: DashboardColors.mediumGrey,
                     ),
                   ),
-                  onSort: (colIndex, ascending) => _onSort(colIndex, ascending),
                 ),
-              ),
-              DataColumn(
-                label: Text(
-                  'Actions',
-                  style: DashboardTextStyles.primaryText500.copyWith(
-                    fontSize: 14,
-                    color: DashboardColors.mediumGrey,
-                  ),
-                ),
-              ),
-            ],
-            rows:
-                _filteredData.map((model) {
-                  return DataRow(
-                    cells: [
-                      ...widget.columns.values.map(
-                        (accessor) => DataCell(
-                          onTap: () => widget.onTapEachRow!(model),
-                          Text(
-                            accessor(model),
-                            style: DashboardTextStyles.primaryText500.copyWith(
-                              fontSize: 14,
-                              color: DashboardColors.primaryBlack,
+              ],
+              rows:
+                  _filteredData.map((model) {
+                    return DataRow(
+                      cells: [
+                        ...widget.columns.values.map(
+                          (accessor) => DataCell(
+                            onTap: () => widget.onTapEachRow!(model),
+                            Text(
+                              accessor(model),
+                              style: DashboardTextStyles.primaryText500
+                                  .copyWith(
+                                    fontSize: 14,
+                                    color: DashboardColors.primaryBlack,
+                                  ),
                             ),
                           ),
                         ),
-                      ),
-                      DataCell(
-                        Row(
-                          children: [
-                            if (widget.onEdit != null)
-                              IconButton(
-                                icon: const Icon(Icons.edit, size: 20),
-                                onPressed: () => widget.onEdit!(model),
-                              ),
-                            if (widget.onDelete != null)
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.delete_outline,
-                                  size: 20,
+                        DataCell(
+                          Row(
+                            children: [
+                              if (widget.onEdit != null)
+                                IconButton(
+                                  icon: const Icon(Icons.edit, size: 20),
+                                  onPressed: () => widget.onEdit!(model),
                                 ),
-                                onPressed: () => widget.onDelete!(model),
-                              ),
-                            if (widget.onPublish != null)
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.publish_outlined,
-                                  size: 20,
+                              if (widget.onDelete != null)
+                                IconButton(
+                                  icon: const Icon(
+                                    Icons.delete_outline,
+                                    size: 20,
+                                  ),
+                                  onPressed: () => widget.onDelete!(model),
                                 ),
-                                onPressed: () => widget.onPublish!(model),
-                              ),
-                          ],
+                              if (widget.onPublish != null)
+                                IconButton(
+                                  icon: const Icon(
+                                    Icons.publish_outlined,
+                                    size: 20,
+                                  ),
+                                  onPressed: () => widget.onPublish!(model),
+                                ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
-                  );
-                }).toList(),
+                      ],
+                    );
+                  }).toList(),
+            ),
           ),
         ),
       ],
