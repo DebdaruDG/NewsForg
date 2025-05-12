@@ -18,42 +18,42 @@ class SidebarItemModel {
 class SidebarItems {
   static List<SidebarItemModel> get topSideBarItems => [
     SidebarItemModel(
-      icon: DashboardIcons.home,
+      icon: DashboardLucideIcons.home,
       label: 'Overview',
       screen: AppScreen.dashboard,
     ),
     SidebarItemModel(
-      icon: DashboardIcons.trade,
+      icon: DashboardLucideIcons.trade,
       label: 'Content',
       screen: AppScreen.content,
     ),
     SidebarItemModel(
-      icon: DashboardIcons.earn,
+      icon: DashboardLucideIcons.earn,
       label: 'Reviews',
       screen: AppScreen.reviews,
     ),
     SidebarItemModel(
-      icon: DashboardIcons.reports,
+      icon: DashboardLucideIcons.reports,
       label: 'Schedules',
       screen: AppScreen.schedules,
     ),
     SidebarItemModel(
-      icon: DashboardIcons.analytics,
+      icon: DashboardLucideIcons.analytics,
       label: 'Analytics',
       screen: AppScreen.analytics,
     ),
     SidebarItemModel(
-      icon: DashboardIcons.distribution,
+      icon: DashboardLucideIcons.distribution,
       label: 'Distribution',
       screen: AppScreen.distribution,
     ),
     SidebarItemModel(
-      icon: DashboardIcons.userManagement,
+      icon: DashboardLucideIcons.userManagement,
       label: 'User Management',
       screen: AppScreen.users,
     ),
     SidebarItemModel(
-      icon: DashboardIcons.roleManagement,
+      icon: DashboardLucideIcons.roleManagement,
       label: 'Role Management',
       screen: AppScreen.roleManagement,
     ),
@@ -61,12 +61,12 @@ class SidebarItems {
 
   static const List<SidebarItemModel> bottomSidebarItems = [
     SidebarItemModel(
-      icon: DashboardIcons.support,
+      icon: DashboardLucideIcons.support,
       label: 'Support',
       screen: AppScreen.dashboard,
     ),
     SidebarItemModel(
-      icon: DashboardIcons.settings,
+      icon: DashboardLucideIcons.settings,
       label: 'Settings',
       screen: AppScreen.dashboard,
     ),
