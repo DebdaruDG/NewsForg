@@ -103,7 +103,7 @@ class _GenericDataTableState<T> extends State<GenericDataTable<T>> {
                         'Export PDF',
                         style: TextStyle(
                           color: DashboardColors.primaryWhite,
-                          fontWeight: FontWeight.normal,
+                          fontWeight: FontWeight.bold,
                           fontSize: 13,
                         ),
                       ),
@@ -135,7 +135,7 @@ class _GenericDataTableState<T> extends State<GenericDataTable<T>> {
                         'Export Excel',
                         style: TextStyle(
                           color: DashboardColors.primaryWhite,
-                          fontWeight: FontWeight.normal,
+                          fontWeight: FontWeight.bold,
                           fontSize: 13,
                         ),
                       ),
@@ -220,6 +220,7 @@ class _GenericDataTableState<T> extends State<GenericDataTable<T>> {
                                   .copyWith(
                                     fontSize: 14,
                                     color: DashboardColors.primaryBlack,
+                                    fontWeight: FontWeight.bold,
                                   ),
                             ),
                           ),

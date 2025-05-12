@@ -144,7 +144,10 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
       children: [
         // Sidebar header with search and toggle button
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 0),
+          padding:
+              (_isSidebarExpanded)
+                  ? const EdgeInsets.symmetric(horizontal: 12, vertical: 0)
+                  : EdgeInsets.zero,
           child: Column(
             children: [
               Row(
@@ -200,7 +203,7 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
             ],
           ),
         ),
-        const SizedBox(height: 12),
+        if (_isSidebarExpanded) const SizedBox(height: 12),
         const Divider(height: 1, color: DashboardColors.lightGrey),
         // Sidebar items using ListView.builder
         Expanded(
@@ -269,6 +272,7 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
                       isSelected
                           ? DashboardColors.primaryBlack
                           : DashboardColors.mediumGrey,
+                  fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                 ),
               )
               : null,
