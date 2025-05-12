@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import '../../model/sidebar_model.dart';
 import '../../routes/routes_name.dart';
 import '../../utils/color_palette.dart';
+import '../../utils/icon_constants.dart';
 import '../../utils/textstyles_constant.dart';
 import '../../utils/widgets/generic_pop_up.dart';
 
@@ -40,34 +41,40 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
 
     return Scaffold(
       backgroundColor: DashboardColors.cardBackground, // Base canvas color
-      body: Column(
-        children: [
-          // Navbar
-          _navBar(popupIconKey),
-          // Main layout with Sidebar and Content
-          Expanded(
-            child: Row(
-              children: [
-                // Sidebar with margin and padding
-                Padding(
-                  padding: const EdgeInsets.only(right: 16, top: 8, bottom: 8),
-                  child: _sideBarContent(
-                    maxSidebarWidth,
-                    collapsedSidebarWidth,
+      body: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+        child: Column(
+          children: [
+            // Navbar
+            _navBar(popupIconKey),
+            // Main layout with Sidebar and Content
+            Expanded(
+              child: Row(
+                children: [
+                  // Sidebar with margin and padding
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      right: 16,
+                      top: 8,
+                      bottom: 8,
+                    ),
+                    child: _sideBarContent(
+                      maxSidebarWidth,
+                      collapsedSidebarWidth,
+                    ),
                   ),
-                ),
-                // Main content
-                Expanded(child: _mainBody),
-              ],
+                  // Main content
+                  Expanded(child: _mainBody),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
 
   Widget _navBar(GlobalKey<State<StatefulWidget>> popUpKey) => Container(
-    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
     color: DashboardColors.cardBackground,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -76,7 +83,8 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
         Row(
           children: [
             const Icon(
-              Icons.explore_outlined,
+              // Icons.explore_outlined,
+              DashboardRemixIcons.compass,
               color: DashboardColors.primaryBlack,
               size: 24,
             ),

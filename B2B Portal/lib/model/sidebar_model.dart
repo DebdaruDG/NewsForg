@@ -18,55 +18,55 @@ class SidebarItemModel {
 class SidebarItems {
   static List<SidebarItemModel> get topSideBarItems => [
     SidebarItemModel(
-      icon: DashboardLucideIcons.home,
+      icon: DashboardRemixIcons.home,
       label: 'Overview',
       screen: AppScreen.dashboard,
     ),
     SidebarItemModel(
-      icon: DashboardLucideIcons.trade,
+      icon: DashboardRemixIcons.trade,
       label: 'Content',
       screen: AppScreen.content,
     ),
     SidebarItemModel(
-      icon: DashboardLucideIcons.earn,
+      icon: DashboardRemixIcons.earn,
       label: 'Reviews',
       screen: AppScreen.reviews,
     ),
     SidebarItemModel(
-      icon: DashboardLucideIcons.reports,
+      icon: DashboardRemixIcons.reports,
       label: 'Schedules',
       screen: AppScreen.schedules,
     ),
     SidebarItemModel(
-      icon: DashboardLucideIcons.analytics,
+      icon: DashboardRemixIcons.analytics,
       label: 'Analytics',
       screen: AppScreen.analytics,
     ),
     SidebarItemModel(
-      icon: DashboardLucideIcons.distribution,
+      icon: DashboardRemixIcons.distribution,
       label: 'Distribution',
       screen: AppScreen.distribution,
     ),
     SidebarItemModel(
-      icon: DashboardLucideIcons.userManagement,
+      icon: DashboardRemixIcons.userManagement,
       label: 'User Management',
       screen: AppScreen.users,
     ),
     SidebarItemModel(
-      icon: DashboardLucideIcons.roleManagement,
+      icon: DashboardRemixIcons.roleManagement,
       label: 'Role Management',
       screen: AppScreen.roleManagement,
     ),
   ];
 
-  static const List<SidebarItemModel> bottomSidebarItems = [
+  static List<SidebarItemModel> bottomSidebarItems = [
     SidebarItemModel(
-      icon: DashboardLucideIcons.support,
+      icon: DashboardRemixIcons.support,
       label: 'Support',
       screen: AppScreen.dashboard,
     ),
     SidebarItemModel(
-      icon: DashboardLucideIcons.settings,
+      icon: DashboardRemixIcons.settings,
       label: 'Settings',
       screen: AppScreen.dashboard,
     ),

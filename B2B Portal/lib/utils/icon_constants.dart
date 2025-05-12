@@ -115,6 +115,7 @@ class DashboardRemixIcons {
   static const IconData declined = RemixIcons.close_circle_line;
   static const IconData trendingUp = RemixIcons.arrow_up_line;
   static const IconData trendingDown = RemixIcons.arrow_down_line;
+  static const IconData compass = RemixIcons.compass_4_line;
 
   // ✅ New icons for sidebar
   static const IconData analytics = RemixIcons.pie_chart_line;
