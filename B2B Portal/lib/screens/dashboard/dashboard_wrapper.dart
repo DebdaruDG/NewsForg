@@ -120,10 +120,19 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
               ),
             ),
             const SizedBox(width: 16),
-            const CircleAvatar(
-              radius: 16,
-              backgroundColor: DashboardColors.lightGrey,
-              child: Icon(Icons.person, color: DashboardColors.primaryBlack),
+            MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: InkWell(
+                onTap: () => context.goNamed(AppScreen.profile.name),
+                child: const CircleAvatar(
+                  radius: 16,
+                  backgroundColor: DashboardColors.lightGrey,
+                  child: Icon(
+                    Icons.person,
+                    color: DashboardColors.primaryBlack,
+                  ),
+                ),
+              ),
             ),
           ],
         ),

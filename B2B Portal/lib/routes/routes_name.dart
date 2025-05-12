@@ -10,6 +10,7 @@ import '../screens/content/content_screen.dart';
 import '../screens/dashboard/dash_screen.dart';
 import '../screens/dashboard/dashboard_wrapper.dart';
 import '../screens/distribution/distribution_screen.dart';
+import '../screens/profile/profile_screen.dart';
 import '../screens/review/reviews_screen.dart';
 import '../screens/role_management/role_screen.dart';
 import '../screens/schedules/schedule_screen.dart';
@@ -35,6 +36,7 @@ enum AppScreen {
   analytics(path: '/analytics', name: 'analytics', isAuth: false),
   distribution(path: '/distribution', name: 'distribution', isAuth: false),
   users(path: '/users', name: 'users', isAuth: false),
+  profile(path: '/profile', name: 'profile', isAuth: false),
   roleManagement(
     path: '/roleManagement',
     name: 'roleManagement',
@@ -64,6 +66,9 @@ enum AppScreen {
         break;
       case AppScreen.forgetPassword:
         screen = const ForgetPasswordScreen();
+        break;
+      case AppScreen.profile:
+        screen = const ProfileScreen();
         break;
       // SideBar Screens
       case AppScreen.dashboard:
