@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lucide_icons/lucide_icons.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:remixicon/remixicon.dart';
 
 // Icon constants for the dashboard
 class DashboardIcons {
@@ -73,4 +75,51 @@ class DashboardFontAwesomeIcons {
       FontAwesomeIcons.paperPlane; // closest to outbox
   static const IconData userManagement = FontAwesomeIcons.users;
   static const IconData roleManagement = FontAwesomeIcons.shieldHalved;
+}
+
+class DashboardMaterialDesignIcons {
+  static IconData get home => MdiIcons.homeOutline;
+  static IconData get trade => MdiIcons.swapHorizontal;
+  static IconData get earn => MdiIcons.trendingUp;
+  static IconData get reports => MdiIcons.chartBar;
+  static IconData get rewards => MdiIcons.starOutline;
+  static IconData get support => MdiIcons.headphones;
+  static IconData get settings => MdiIcons.cogOutline;
+  static IconData get transaction => MdiIcons.history;
+  static IconData get visa => MdiIcons.creditCardOutline;
+  static IconData get paypal => MdiIcons.walletOutline;
+  static IconData get success => MdiIcons.checkCircleOutline;
+  static IconData get declined => MdiIcons.closeCircleOutline;
+  static IconData get trendingUp => MdiIcons.arrowUp;
+  static IconData get trendingDown => MdiIcons.arrowDown;
+
+  // ✅ New icons for sidebar
+  static IconData get analytics => MdiIcons.chartPie;
+  static IconData get distribution => MdiIcons.send; // closest to outbox
+  static IconData get userManagement => MdiIcons.accountGroupOutline;
+  static IconData get roleManagement => MdiIcons.shieldAccountOutline;
+}
+
+class DashboardRemixIcons {
+  static const IconData home = RemixIcons.home_3_line;
+  static const IconData trade = RemixIcons.exchange_line;
+  static const IconData earn = RemixIcons.line_chart_line;
+  static const IconData reports = RemixIcons.bar_chart_2_line;
+  static const IconData rewards = RemixIcons.star_line;
+  static const IconData support = RemixIcons.headphone_line;
+  static const IconData settings = RemixIcons.settings_3_line;
+  static const IconData transaction = RemixIcons.history_line;
+  static const IconData visa = RemixIcons.bank_card_line;
+  static const IconData paypal = RemixIcons.wallet_3_line;
+  static const IconData success = RemixIcons.checkbox_circle_line;
+  static const IconData declined = RemixIcons.close_circle_line;
+  static const IconData trendingUp = RemixIcons.arrow_up_line;
+  static const IconData trendingDown = RemixIcons.arrow_down_line;
+
+  // ✅ New icons for sidebar
+  static const IconData analytics = RemixIcons.pie_chart_line;
+  static const IconData distribution =
+      RemixIcons.send_plane_line; // closest to outbox
+  static const IconData userManagement = RemixIcons.team_line;
+  static const IconData roleManagement = RemixIcons.shield_user_line;
 }
