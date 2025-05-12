@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:newsforg_b2b_portal/utils/textstyles_constant.dart';
 import '../../utils/color_palette.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -38,8 +39,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
               children: [
                 const CircleAvatar(
                   radius: 30,
-                  backgroundColor: Colors.grey,
-                  child: Icon(Icons.person, size: 40, color: Colors.white),
+                  backgroundColor: DashboardColors.mediumGrey,
+                  child: Icon(
+                    Icons.person,
+                    size: 40,
+                    color: DashboardColors.primaryWhite,
+                  ),
                 ),
                 const SizedBox(width: 16),
                 Column(
@@ -54,7 +59,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     Text(
                       'Role: Senior Reporter',
-                      style: TextStyle(color: Colors.grey[600]),
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: DashboardColors.mediumGrey,
+                      ),
                     ),
                   ],
                 ),
@@ -63,29 +71,59 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   children: [
                     ElevatedButton.icon(
                       onPressed: () => debugPrint('Send Email'),
-                      icon: const Icon(Icons.email),
-                      label: const Text('Send Email'),
+                      icon: const Icon(
+                        Icons.email,
+                        color: DashboardColors.primaryWhite,
+                      ),
+                      label: Text(
+                        'Send Email',
+                        style: DashboardTextStyles.amountMedium.copyWith(
+                          fontSize: 14,
+                          color: DashboardColors.primaryWhite,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.blue,
-                        foregroundColor: Colors.white,
+                        backgroundColor: DashboardColors.primaryBlack,
+                        foregroundColor: DashboardColors.primaryWhite,
                       ),
                     ),
                     const SizedBox(width: 8),
                     OutlinedButton.icon(
                       onPressed: () => debugPrint('Schedule Meeting'),
-                      icon: const Icon(Icons.calendar_today),
-                      label: const Text('Schedule Meeting'),
+                      icon: const Icon(
+                        Icons.calendar_today,
+                        color: DashboardColors.primaryBlack,
+                      ),
+                      label: Text(
+                        'Schedule Meeting',
+                        style: DashboardTextStyles.amountMedium.copyWith(
+                          fontSize: 14,
+                          color: DashboardColors.primaryBlack,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       style: OutlinedButton.styleFrom(
-                        foregroundColor: Colors.blue,
+                        foregroundColor: DashboardColors.primaryBlack,
                       ),
                     ),
                     const SizedBox(width: 8),
                     OutlinedButton.icon(
                       onPressed: () => debugPrint('Follow'),
-                      icon: const Icon(Icons.person_add),
-                      label: const Text('Follow'),
+                      icon: const Icon(
+                        Icons.person_add,
+                        color: DashboardColors.primaryBlack,
+                      ),
+                      label: Text(
+                        'Follow',
+                        style: DashboardTextStyles.amountMedium.copyWith(
+                          fontSize: 14,
+                          color: DashboardColors.primaryBlack,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       style: OutlinedButton.styleFrom(
-                        foregroundColor: Colors.blue,
+                        foregroundColor: DashboardColors.primaryBlack,
                       ),
                     ),
                   ],
@@ -102,15 +140,25 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   return Padding(
                     padding: const EdgeInsets.only(right: 8),
                     child: ChoiceChip(
-                      label: Text(_tabs[index]),
+                      label: Text(
+                        _tabs[index],
+                        style: DashboardTextStyles.amountMedium.copyWith(
+                          fontSize: 14,
+                          color:
+                              _selectedTabIndex == index
+                                  ? DashboardColors.primaryWhite
+                                  : DashboardColors.primaryBlack,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       selected: _selectedTabIndex == index,
                       onSelected: (selected) {
                         setState(() {
                           _selectedTabIndex = index;
                         });
                       },
-                      selectedColor: Colors.blue.withOpacity(0.2),
-                      backgroundColor: Colors.grey[200],
+                      selectedColor: DashboardColors.primaryBlack,
+                      backgroundColor: DashboardColors.primaryWhite,
                     ),
                   );
                 }),
@@ -128,17 +176,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: LinearProgressIndicator(
                       value: 0.5, // Replace with dynamic progress
                       backgroundColor: Colors.grey[300],
-                      color: Colors.blue,
+                      color: DashboardColors.primaryBlack,
                     ),
                   ),
                   const SizedBox(width: 16),
                   ElevatedButton(
                     onPressed: () => debugPrint('Move to Next Stage'),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
+                      backgroundColor: DashboardColors.primaryBlack,
                       foregroundColor: Colors.white,
                     ),
-                    child: const Text('Move to Next Stage'),
+                    child: Text(
+                      'Move to Next Stage',
+                      style: DashboardTextStyles.amountMedium.copyWith(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                        color: DashboardColors.primaryWhite,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -148,11 +203,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
               _buildSectionTitle('Contact Details'),
               Row(
                 children: [
-                  const Icon(Icons.phone, color: Colors.blue),
+                  const Icon(Icons.phone, color: DashboardColors.primaryBlack),
                   const SizedBox(width: 8),
                   const Text('+1 123-456-7890'), // Replace with dynamic data
                   const SizedBox(width: 32),
-                  const Icon(Icons.email, color: Colors.blue),
+                  const Icon(Icons.email, color: DashboardColors.primaryBlack),
                   const SizedBox(width: 8),
                   const Text('john.doe@email.com'), // Replace with dynamic data
                 ],
@@ -160,7 +215,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
               const SizedBox(height: 8),
               Row(
                 children: [
-                  const Icon(Icons.location_on, color: Colors.blue),
+                  const Icon(
+                    Icons.location_on,
+                    color: DashboardColors.primaryBlack,
+                  ),
                   const SizedBox(width: 8),
                   const Text('New York, USA'), // Replace with dynamic data
                 ],
