@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'color_palette.dart';
 
 class DashboardTextStyles {
-  static const String fontFamily = 'Roboto';
+  static const String fontFamily = 'Bitter'; // 'Roboto';
 
   // Large text for total balance
   static const TextStyle balanceLarge = TextStyle(
