@@ -84,22 +84,29 @@ class _GenericDataTableState<T> extends State<GenericDataTable<T>> {
                           (Set<WidgetState> states) {
                             if (states.contains(WidgetState.pressed)) {
                               return DashboardColors
-                                  .canvasBackground; // Color when pressed
+                                  .primaryBlack; // Color when pressed
                             }
                             if (states.contains(WidgetState.disabled)) {
                               return DashboardColors
-                                  .lightGrey; // Color when disabled
+                                  .primaryBlack; // Color when disabled
                             }
                             if (states.contains(WidgetState.hovered)) {
                               return DashboardColors
-                                  .canvasBackground; // Color when hovered
+                                  .primaryBlack; // Color when hovered
                             }
                             return DashboardColors
-                                .cardBackground; // Default color
+                                .primaryBlack; // Default color
                           },
                         ),
                       ),
-                      child: const Text('Export PDF'),
+                      child: const Text(
+                        'Export PDF',
+                        style: TextStyle(
+                          color: DashboardColors.primaryWhite,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 13,
+                        ),
+                      ),
                     ),
                     const SizedBox(width: 8),
                     ElevatedButton(
@@ -109,33 +116,47 @@ class _GenericDataTableState<T> extends State<GenericDataTable<T>> {
                           (Set<WidgetState> states) {
                             if (states.contains(WidgetState.pressed)) {
                               return DashboardColors
-                                  .canvasBackground; // Color when pressed
+                                  .primaryBlack; // Color when pressed
                             }
                             if (states.contains(WidgetState.disabled)) {
                               return DashboardColors
-                                  .lightGrey; // Color when disabled
+                                  .primaryBlack; // Color when disabled
                             }
                             if (states.contains(WidgetState.hovered)) {
                               return DashboardColors
-                                  .canvasBackground; // Color when hovered
+                                  .primaryBlack; // Color when hovered
                             }
                             return DashboardColors
-                                .cardBackground; // Default color
+                                .primaryBlack; // Default color
                           },
                         ),
                       ),
-                      child: const Text('Export Excel'),
+                      child: const Text(
+                        'Export Excel',
+                        style: TextStyle(
+                          color: DashboardColors.primaryWhite,
+                          fontWeight: FontWeight.normal,
+                          fontSize: 13,
+                        ),
+                      ),
                     ),
                     const SizedBox(width: 8),
                   ],
                 ),
               SizedBox(
-                width: MediaQuery.of(context).size.width * 0.1,
+                width: MediaQuery.of(context).size.width * 0.15,
+                height: 50,
                 child: TextField(
                   decoration: const InputDecoration(
                     hintText: 'Search...',
                     prefixIcon: Icon(Icons.search),
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(12)),
+                      borderSide: BorderSide(
+                        color: DashboardColors.mediumGrey,
+                        width: 0.6,
+                      ),
+                    ),
                   ),
                   onChanged: (value) {
                     setState(() {
@@ -180,7 +201,8 @@ class _GenericDataTableState<T> extends State<GenericDataTable<T>> {
                     'Actions',
                     style: DashboardTextStyles.primaryText500.copyWith(
                       fontSize: 14,
-                      color: DashboardColors.mediumGrey,
+                      color: DashboardColors.primaryWhite,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
