@@ -6,6 +6,7 @@ import '../../utils/color_palette.dart';
 import '../../utils/icon_constants.dart';
 import '../../utils/textstyles_constant.dart';
 import '../../utils/widgets/generic_pop_up.dart';
+import 'notification_pop_up_content.dart';
 
 class DashboardWrapper extends StatefulWidget {
   final Widget child;
@@ -103,13 +104,8 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
                       context: context,
                       iconKey: popUpKey,
                       contentWidgets: [
-                        TextButton(
-                          onPressed: () {},
-                          child: const Text(
-                            "Edit",
-                            style: DashboardTextStyles.primaryText400,
-                          ),
-                        ),
+                        NotificationPopupContent(key: widget.key),
+                        // const NotificationPopupContent(),
                       ],
                     ),
                 child: const Icon(
