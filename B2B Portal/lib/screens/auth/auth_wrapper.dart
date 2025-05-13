@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../utils/bicycle_animation.dart';
 import '../../utils/color_palette.dart';
 import '../../utils/textstyles_constant.dart';
 
@@ -30,12 +31,10 @@ class AuthWrapper extends StatelessWidget {
                   decoration: const BoxDecoration(
                     color: DashboardColors.canvasBackground,
                     borderRadius: BorderRadius.all(Radius.circular(24)),
-                    image: DecorationImage(
-                      image: AssetImage(
-                        'assets/auth_image.jpg',
-                      ), // Replace with your image
-                      fit: BoxFit.cover,
-                    ),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: const BorderRadius.all(Radius.circular(24)),
+                    child: const BicycleAnimation(),
                   ),
                 ),
               ),
