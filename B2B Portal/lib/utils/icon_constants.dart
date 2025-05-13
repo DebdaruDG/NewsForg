@@ -123,4 +123,8 @@ class DashboardRemixIcons {
       RemixIcons.send_plane_line; // closest to outbox
   static const IconData userManagement = RemixIcons.team_line;
   static const IconData roleManagement = RemixIcons.shield_user_line;
+
+  // Nav Bar icons (Right side)
+  static const IconData notification = RemixIcons.notification_4_line;
+  static const IconData profileIcon = RemixIcons.user_line;
 }

@@ -83,7 +83,6 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
         Row(
           children: [
             const Icon(
-              // Icons.explore_outlined,
               DashboardRemixIcons.compass,
               color: DashboardColors.primaryBlack,
               size: 24,
@@ -114,7 +113,7 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
                       ],
                     ),
                 child: const Icon(
-                  Icons.notifications_outlined,
+                  DashboardRemixIcons.notification,
                   color: DashboardColors.primaryBlack,
                 ),
               ),
@@ -128,8 +127,9 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
                   radius: 16,
                   backgroundColor: DashboardColors.lightGrey,
                   child: Icon(
-                    Icons.person,
+                    DashboardRemixIcons.profileIcon,
                     color: DashboardColors.primaryBlack,
+                    size: 18,
                   ),
                 ),
               ),
