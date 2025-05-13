@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../utils/bicycle_animation.dart';
+import '../../utils/auth_animation/bicycle_animation.dart';
 import '../../utils/color_palette.dart';
 import '../../utils/textstyles_constant.dart';
 
