@@ -139,16 +139,27 @@ class ContentDetailsPage extends StatelessWidget {
           child: Icon(Icons.person, color: Colors.white),
         ),
         const SizedBox(width: 12),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(comment, style: const TextStyle(fontSize: 15)),
-            const SizedBox(height: 4),
-            Text(
-              "$name • $timeAgo",
-              style: const TextStyle(color: Colors.grey, fontSize: 13),
-            ),
-          ],
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                comment,
+                style: DashboardTextStyles.amountMedium.copyWith(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 16,
+                ),
+              ),
+              const SizedBox(height: 4),
+              Text(
+                "$name • $timeAgo",
+                style: DashboardTextStyles.amountMedium.copyWith(
+                  fontWeight: FontWeight.w400,
+                  fontSize: 14,
+                ),
+              ),
+            ],
+          ),
         ),
       ],
     );
