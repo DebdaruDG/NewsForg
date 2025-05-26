@@ -1,0 +1,130 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String     @id @default(uuid()) @db.Uuid
+  name         String
+  email        String
+  passwordHash String     @map("password_hash")
+  isActive     Boolean    @map("is_active")
+  createdAt    DateTime   @map("created_at")
+
+  companyUsers CompanyUser[]
+  newsArticles NewsArticle[] @relation("NewsCreatedBy")
+  assignedArticles NewsArticle[] @relation("NewsAssignedTo")
+  comments     ArticleComment[]
+  mediaUploads Media[]
+  statusChanges ArticleStatusHistory[]
+}
+
+model Role {
+  id        String           @id @default(uuid()) @db.Uuid
+  name      String
+  createdAt DateTime         @map("created_at")
+
+  rolePermissions RolePermission[]
+}
+
+model Permission {
+  id          String           @id @default(uuid()) @db.Uuid
+  name        String
+  key         String
+  description String
+
+  rolePermissions RolePermission[]
+}
+
+model RolePermission {
+  id           String @id @default(uuid()) @db.Uuid
+  roleId       String @map("role_id")
+  permissionId String @map("permission_id")
+
+  role       Role       @relation(fields: [roleId], references: [id])
+  permission Permission @relation(fields: [permissionId], references: [id])
+}
+
+model CompanyUser {
+  id            String   @id @default(uuid()) @db.Uuid
+  userId        String   @map("user_id")
+  companyId     String   @map("company_id")
+  roleInCompany String   @map("role_in_company")
+  status        String
+  invitedBy     String   @map("invited_by")
+  createdAt     DateTime @map("created_at")
+
+  user    User    @relation(fields: [userId], references: [id])
+  company Company @relation(fields: [companyId], references: [id])
+}
+
+model Company {
+  id          String   @id @default(uuid()) @db.Uuid
+  name        String
+  industry    String
+  description String
+  logoUrl     String   @map("logo_url")
+  createdBy   String   @map("created_by")
+  createdAt   DateTime @map("created_at")
+
+  users        CompanyUser[]
+  newsArticles NewsArticle[]
+}
+
+model NewsArticle {
+  id         String   @id @default(uuid()) @db.Uuid
+  title      String
+  content    String
+  summary    String
+  status     String
+  createdBy  String   @map("created_by")
+  assignedTo String   @map("assigned_to")
+  companyId  String   @map("company_id")
+  createdAt  DateTime @map("created_at")
+
+  creator   User    @relation("NewsCreatedBy", fields: [createdBy], references: [id])
+  assignee  User    @relation("NewsAssignedTo", fields: [assignedTo], references: [id])
+  company   Company @relation(fields: [companyId], references: [id])
+  comments  ArticleComment[]
+  media     Media[]
+  history   ArticleStatusHistory[]
+}
+
+model ArticleStatusHistory {
+  id         String   @id @default(uuid()) @db.Uuid
+  articleId  String   @map("article_id")
+  fromStatus String   @map("from_status")
+  toStatus   String   @map("to_status")
+  changedBy  String   @map("changed_by")
+  changedAt  DateTime @map("changed_at")
+
+  article NewsArticle @relation(fields: [articleId], references: [id])
+  user    User        @relation(fields: [changedBy], references: [id])
+}
+
+model ArticleComment {
+  id        String   @id @default(uuid()) @db.Uuid
+  articleId String   @map("article_id")
+  userId    String   @map("user_id")
+  comment   String
+  createdAt String   @map("created_at") // Consider changing to DateTime if possible
+
+  article NewsArticle @relation(fields: [articleId], references: [id])
+  user    User        @relation(fields: [userId], references: [id])
+}
+
+model Media {
+  id        String   @id @default(uuid()) @db.Uuid
+  articleId String   @map("article_id")
+  mediaUrl  String   @map("media_url")
+  mediaType String   @map("media_type")
+  uploadedBy String  @map("uploaded_by")
+  createdAt DateTime @map("created_at")
+
+  article NewsArticle @relation(fields: [articleId], references: [id])
+  user    User        @relation(fields: [uploadedBy], references: [id])
+}
