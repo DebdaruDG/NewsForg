@@ -1,9 +1,14 @@
 import { Router } from 'express';
 import { z } from 'zod';
-import { login } from '../../services/auth.service';
-import { validateRequest } from '../../middleware/validate.middleware';
+import { login, signup } from '../../../services/auth.service';
+import { validateRequest } from '../../../middleware/validate.middleware';
+import rateLimit from 'express-rate-limit';
 
 const router = Router();
+const authLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // 100 requests per IP
+});
 
 const loginSchema = z.object({
   email: z.string().email(),
