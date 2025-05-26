@@ -48,3 +48,15 @@ Apart from this this also includes publication Schedule.
 5. Analytics - Pending Reviews, Breaking News Today, Scheduled posts, Team Reach.
 
 
+User Management :- 
+
+1. User ID
+2. Full Name
+3. Email
+4. Role
+5. Status
+6. Last Login (not needed).
+7. Created On
+8. Action
+
+

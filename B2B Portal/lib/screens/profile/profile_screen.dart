@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:newsforg_b2b_portal/utils/textstyles_constant.dart';
 import '../../utils/color_palette.dart';
+import '../../utils/textstyles_constant.dart';
+import '../../utils/widgets/generic_pop_up.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -26,6 +27,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Container(
       padding: const EdgeInsets.all(16),
       height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
         color: DashboardColors.primaryWhite,
         borderRadius: const BorderRadius.all(Radius.circular(14)),
@@ -67,66 +69,223 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ],
                 ),
                 const Spacer(),
-                Row(
-                  children: [
-                    ElevatedButton.icon(
-                      onPressed: () => debugPrint('Send Email'),
-                      icon: const Icon(
-                        Icons.email,
-                        color: DashboardColors.primaryWhite,
-                      ),
-                      label: Text(
-                        'Send Email',
-                        style: DashboardTextStyles.amountMedium.copyWith(
-                          fontSize: 14,
-                          color: DashboardColors.primaryWhite,
-                          fontWeight: FontWeight.bold,
+                Builder(
+                  builder: (context) {
+                    double width = MediaQuery.of(context).size.width;
+                    bool webView = width > 932;
+                    bool tabletView = width >= 812 && width <= 932;
+                    // Large Screens
+                    if (webView) {
+                      return Row(
+                        children: [
+                          ElevatedButton.icon(
+                            onPressed: () => debugPrint('Send Email'),
+                            icon: const Icon(
+                              Icons.email,
+                              color: DashboardColors.primaryWhite,
+                            ),
+                            label: Text(
+                              'Send Email',
+                              style: DashboardTextStyles.amountMedium.copyWith(
+                                fontSize: 14,
+                                color: DashboardColors.primaryWhite,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: DashboardColors.primaryBlack,
+                              foregroundColor: DashboardColors.primaryWhite,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          OutlinedButton.icon(
+                            onPressed: () => debugPrint('Schedule Meeting'),
+                            icon: const Icon(
+                              Icons.calendar_today,
+                              color: DashboardColors.primaryBlack,
+                            ),
+                            label: Text(
+                              'Schedule Meeting',
+                              style: DashboardTextStyles.amountMedium.copyWith(
+                                fontSize: 14,
+                                color: DashboardColors.primaryBlack,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            style: OutlinedButton.styleFrom(
+                              foregroundColor: DashboardColors.primaryBlack,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          OutlinedButton.icon(
+                            onPressed: () => debugPrint('Follow'),
+                            icon: const Icon(
+                              Icons.person_add,
+                              color: DashboardColors.primaryBlack,
+                            ),
+                            label: Text(
+                              'Follow',
+                              style: DashboardTextStyles.amountMedium.copyWith(
+                                fontSize: 14,
+                                color: DashboardColors.primaryBlack,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            style: OutlinedButton.styleFrom(
+                              foregroundColor: DashboardColors.primaryBlack,
+                            ),
+                          ),
+                        ],
+                      );
+                    }
+                    // Tablet Width
+                    else if (tabletView) {
+                      return Row(
+                        children: [
+                          ElevatedButton.icon(
+                            onPressed: () => debugPrint('Send Email'),
+                            icon: const Icon(
+                              Icons.email,
+                              color: DashboardColors.primaryWhite,
+                            ),
+                            label: Text(
+                              'Email',
+                              style: DashboardTextStyles.amountMedium.copyWith(
+                                fontSize: 14,
+                                color: DashboardColors.primaryWhite,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: DashboardColors.primaryBlack,
+                              foregroundColor: DashboardColors.primaryWhite,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          OutlinedButton.icon(
+                            onPressed: () => debugPrint('Schedule Meeting'),
+                            icon: const Icon(
+                              Icons.calendar_today,
+                              color: DashboardColors.primaryBlack,
+                            ),
+                            label: Text(
+                              'Meeting',
+                              style: DashboardTextStyles.amountMedium.copyWith(
+                                fontSize: 14,
+                                color: DashboardColors.primaryBlack,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            style: OutlinedButton.styleFrom(
+                              foregroundColor: DashboardColors.primaryBlack,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          OutlinedButton.icon(
+                            onPressed: () => debugPrint('Follow'),
+                            icon: const Icon(
+                              Icons.person_add,
+                              color: DashboardColors.primaryBlack,
+                            ),
+                            label: Text(
+                              'Follow',
+                              style: DashboardTextStyles.amountMedium.copyWith(
+                                fontSize: 14,
+                                color: DashboardColors.primaryBlack,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            style: OutlinedButton.styleFrom(
+                              foregroundColor: DashboardColors.primaryBlack,
+                            ),
+                          ),
+                        ],
+                      );
+                    }
+                    // Small Screen - Show Popup Menu
+                    else {
+                      final GlobalKey popupIconKey = GlobalKey();
+                      return MouseRegion(
+                        cursor: SystemMouseCursors.click,
+                        child: GestureDetector(
+                          key: popupIconKey,
+                          onTap:
+                              () => GenericPopupMenu.show(
+                                context: context,
+                                iconKey: popupIconKey,
+                                contentWidgets: [
+                                  ElevatedButton.icon(
+                                    onPressed: () => debugPrint('Send Email'),
+                                    icon: const Icon(
+                                      Icons.email,
+                                      color: DashboardColors.primaryWhite,
+                                    ),
+                                    label: Text(
+                                      'Send Email',
+                                      style: DashboardTextStyles.amountMedium
+                                          .copyWith(
+                                            fontSize: 14,
+                                            color: DashboardColors.primaryWhite,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                    ),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          DashboardColors.primaryBlack,
+                                      foregroundColor:
+                                          DashboardColors.primaryWhite,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  OutlinedButton.icon(
+                                    onPressed:
+                                        () => debugPrint('Schedule Meeting'),
+                                    icon: const Icon(
+                                      Icons.calendar_today,
+                                      color: DashboardColors.primaryBlack,
+                                    ),
+                                    label: Text(
+                                      'Schedule Meeting',
+                                      style: DashboardTextStyles.amountMedium
+                                          .copyWith(
+                                            fontSize: 14,
+                                            color: DashboardColors.primaryBlack,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                    ),
+                                    style: OutlinedButton.styleFrom(
+                                      foregroundColor:
+                                          DashboardColors.primaryBlack,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  OutlinedButton.icon(
+                                    onPressed: () => debugPrint('Follow'),
+                                    icon: const Icon(
+                                      Icons.person_add,
+                                      color: DashboardColors.primaryBlack,
+                                    ),
+                                    label: Text(
+                                      'Follow',
+                                      style: DashboardTextStyles.amountMedium
+                                          .copyWith(
+                                            fontSize: 14,
+                                            color: DashboardColors.primaryBlack,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                    ),
+                                    style: OutlinedButton.styleFrom(
+                                      foregroundColor:
+                                          DashboardColors.primaryBlack,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                          child: const Icon(Icons.more_vert),
                         ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: DashboardColors.primaryBlack,
-                        foregroundColor: DashboardColors.primaryWhite,
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    OutlinedButton.icon(
-                      onPressed: () => debugPrint('Schedule Meeting'),
-                      icon: const Icon(
-                        Icons.calendar_today,
-                        color: DashboardColors.primaryBlack,
-                      ),
-                      label: Text(
-                        'Schedule Meeting',
-                        style: DashboardTextStyles.amountMedium.copyWith(
-                          fontSize: 14,
-                          color: DashboardColors.primaryBlack,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      style: OutlinedButton.styleFrom(
-                        foregroundColor: DashboardColors.primaryBlack,
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    OutlinedButton.icon(
-                      onPressed: () => debugPrint('Follow'),
-                      icon: const Icon(
-                        Icons.person_add,
-                        color: DashboardColors.primaryBlack,
-                      ),
-                      label: Text(
-                        'Follow',
-                        style: DashboardTextStyles.amountMedium.copyWith(
-                          fontSize: 14,
-                          color: DashboardColors.primaryBlack,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      style: OutlinedButton.styleFrom(
-                        foregroundColor: DashboardColors.primaryBlack,
-                      ),
-                    ),
-                  ],
+                      );
+                    }
+                  },
                 ),
               ],
             ),
@@ -159,6 +318,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       },
                       selectedColor: DashboardColors.primaryBlack,
                       backgroundColor: DashboardColors.primaryWhite,
+                      showCheckmark: false,
                     ),
                   );
                 }),
