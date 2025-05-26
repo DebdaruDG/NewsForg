@@ -21,7 +21,7 @@ const createArticleSchema = z.object({
 router.post('/', authenticateToken, validateRequest(createArticleSchema), async (req, res) => {
   try {
     const { title, content, summary, status, companyId } = req.body;
-    const userId = req.user.userId;
+    const userId = req.body.user.userId;
     const article = await createArticle({ title, content, summary, status, companyId, createdBy: userId });
     res.status(201).json({ data: article, message: 'Article created', status: 201 });
   } catch (error) {
