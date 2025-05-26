@@ -42,8 +42,8 @@ model Permission {
 
 model RolePermission {
   id           String @id @default(uuid()) @db.Uuid
-  roleId       String @map("role_id")
-  permissionId String @map("permission_id")
+  roleId       String @db.Uuid @map("role_id")
+  permissionId String @db.Uuid @map("permission_id")
 
   role       Role       @relation(fields: [roleId], references: [id])
   permission Permission @relation(fields: [permissionId], references: [id])
