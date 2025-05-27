@@ -1,18 +1,17 @@
-import express, { json } from "express";
-import { Pool } from "pg";
-import cors from "cors";
+const express = require("express");
+const { Pool } = require("pg");
+const cors = require("cors");
 require("dotenv").config();
 
 const app = express();
 app.use(cors());
-app.use(json());
+app.use(express.json());
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
   ssl: { rejectUnauthorized: false } // required for Neon
 });
 
-// Route to add email
 app.post("/subscribe", async (req, res) => {
   const { email } = req.body;
   if (!email) return res.status(400).json({ error: "Email is required" });
