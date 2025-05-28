@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:newsforg_b2b_portal/utils/textstyles_constant.dart';
 import 'package:provider/provider.dart';
 
+import '../../../model/comment_model.dart';
 import '../../../provider/content_details_helper_provider.dart';
 import '../../../utils/color_palette.dart';
 import '../../../utils/icon_constants.dart';
@@ -91,52 +92,51 @@ class ContentDetailsPage extends StatelessWidget {
                       (provider.showComments ? 0.225 : 0.075),
                   child: Padding(
                     padding: const EdgeInsets.all(16),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        if (provider.showComments != true)
-                          IconButton(
-                            tooltip:
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          if (provider.showComments != true)
+                            IconButton(
+                              tooltip:
+                                  provider.showComments
+                                      ? 'Hide Comments'
+                                      : 'Show Comments',
+                              icon: Icon(
                                 provider.showComments
-                                    ? 'Hide Comments'
-                                    : 'Show Comments',
-                            icon: Icon(
-                              provider.showComments
-                                  ? Icons.comment_bank
-                                  : DashboardMaterialDesignIcons.comment,
+                                    ? Icons.comment_bank
+                                    : DashboardMaterialDesignIcons.comment,
+                              ),
+                              onPressed: () => provider.toggleCommentTab(),
                             ),
-                            onPressed: () => provider.toggleCommentTab(),
-                          ),
-                        if (provider.showComments) ...[
-                          Row(
-                            children: [
-                              IconButton(
-                                tooltip: 'Hide Comments',
-                                icon: Icon(DashboardRemixIcons.arrowIconLeft),
-                                onPressed: () => provider.toggleCommentTab(),
-                              ),
-                              Text(
-                                "Comments",
-                                style: Theme.of(context).textTheme.titleMedium
-                                    ?.copyWith(fontWeight: FontWeight.bold),
-                              ),
-                            ],
-                          ),
-                          const SizedBox(height: 16),
-                          _commentItem(
-                            name: "Alice",
-                            comment: "This content is really insightful!",
-                            timeAgo: "2 hours ago",
-                          ),
-                          const SizedBox(height: 16),
-                          _commentItem(
-                            name: "Bob",
-                            comment: "Loved the breakdown of each concept.",
-                            timeAgo: "5 hours ago",
-                          ),
+                          if (provider.showComments) ...[
+                            Row(
+                              children: [
+                                IconButton(
+                                  tooltip: 'Hide Comments',
+                                  icon: Icon(DashboardRemixIcons.arrowIconLeft),
+                                  onPressed: () => provider.toggleCommentTab(),
+                                ),
+                                Text(
+                                  "Comments",
+                                  style: Theme.of(context).textTheme.titleMedium
+                                      ?.copyWith(fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 16),
+                            ListView.builder(
+                              itemCount: provider.mockComments.length,
+                              shrinkWrap: true,
+                              itemBuilder:
+                                  (context, index) => _commentItem(
+                                    model: provider.mockComments[index],
+                                  ),
+                            ),
+                          ],
                         ],
-                      ],
+                      ),
                     ),
                   ),
                 ),
@@ -166,43 +166,42 @@ class ContentDetailsPage extends StatelessWidget {
     );
   }
 
-  Widget _commentItem({
-    required String name,
-    required String comment,
-    required String timeAgo,
-  }) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const CircleAvatar(
-          radius: 20,
-          backgroundColor: Colors.grey,
-          child: Icon(Icons.person, color: Colors.white),
-        ),
-        const SizedBox(width: 12),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                comment,
-                style: DashboardTextStyles.amountMedium.copyWith(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 16,
-                ),
-              ),
-              const SizedBox(height: 4),
-              Text(
-                "$name • $timeAgo",
-                style: DashboardTextStyles.amountMedium.copyWith(
-                  fontWeight: FontWeight.w400,
-                  fontSize: 14,
-                ),
-              ),
-            ],
+  Widget _commentItem({required CommentModel model}) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const CircleAvatar(
+            radius: 20,
+            backgroundColor: Colors.grey,
+            child: Icon(Icons.person, color: Colors.white),
           ),
-        ),
-      ],
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  model.comment,
+                  style: DashboardTextStyles.amountMedium.copyWith(
+                    fontWeight: FontWeight.w500,
+                    fontSize: 16,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  "${model.name} • ${model.timeAgo}",
+                  style: DashboardTextStyles.amountMedium.copyWith(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
     );
   }
 
