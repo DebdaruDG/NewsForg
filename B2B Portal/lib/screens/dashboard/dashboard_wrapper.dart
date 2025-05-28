@@ -103,7 +103,16 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
                     () => GenericPopupMenu.show(
                       context: context,
                       iconKey: popUpKey,
+                      height: MediaQuery.of(context).size.height * 0.8,
+                      width: MediaQuery.of(context).size.width * 0.5,
                       contentWidgets: [
+                        // SizedBox(
+                        //   height: MediaQuery.of(context).size.height * 0.25,
+                        //   child: ListView.builder(
+                        //     itemCount: 10,
+                        //     itemBuilder: (context, index) => Text('Yatyyy'),
+                        //   ),
+                        // ),
                         NotificationPopupContent(key: widget.key),
                       ],
                     ),

@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import '../../utils/color_palette.dart';
 import '../../utils/textstyles_constant.dart';
 
 class NotificationPopupContent extends StatefulWidget {
@@ -56,59 +59,51 @@ class _NotificationPopupContentState extends State<NotificationPopupContent> {
 
     return Container(
       padding: const EdgeInsets.all(12),
-      width: MediaQuery.of(context).size.width * 0.5,
       decoration: BoxDecoration(
         color: background,
         borderRadius: BorderRadius.circular(12),
       ),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Text(
-                  "Notifications",
-                  style: DashboardTextStyles.amountMedium.copyWith(
-                    color: textColor,
-                  ),
+      child: Column(
+        children: [
+          Row(
+            children: [
+              Text(
+                "Notifications",
+                style: DashboardTextStyles.amountMedium.copyWith(
+                  color: textColor,
                 ),
-                const Spacer(),
-                Text(
-                  "(${notifications.length})",
-                  style: DashboardTextStyles.primaryText400,
-                ),
-                const SizedBox(width: 6),
-                const Icon(Icons.settings, size: 18),
-              ],
-            ),
-            const SizedBox(height: 10),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.8,
-              width: MediaQuery.of(context).size.height * 0.4,
-              child: ListView.separated(
-                shrinkWrap: true,
-                itemCount: notifications.length,
-                separatorBuilder:
-                    (_, __) => Divider(thickness: 0.4, color: borderColor),
-                itemBuilder: (context, index) {
-                  final item = notifications[index];
-                  return _notificationTile(
-                    context,
-                    item,
-                    textColor,
-                    borderColor,
-                    isDark,
-                  );
-                },
+              ),
+              const SizedBox(width: 6),
+              Text(
+                "(${notifications.length})",
+                style: DashboardTextStyles.primaryText400,
+              ),
+              const Spacer(),
+              const Icon(Icons.settings, size: 24),
+            ],
+          ),
+          const SizedBox(height: 10),
+          SizedBox(
+            height: MediaQuery.of(context).size.height * 0.642,
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  for (Map<String, dynamic> notification in notifications) ...[
+                    _notificationTile(
+                      context,
+                      notification,
+                      textColor,
+                      borderColor,
+                      isDark,
+                    ),
+                    Container(height: 0.5, color: DashboardColors.lightGrey),
+                  ],
+                ],
               ),
             ),
-            const SizedBox(height: 12),
-            TextButton(
-              onPressed: () {},
-              child: const Text("All notifications"),
-            ),
-          ],
-        ),
+          ),
+          TextButton(onPressed: () {}, child: const Text("All notifications")),
+        ],
       ),
     );
   }
