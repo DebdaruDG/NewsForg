@@ -35,6 +35,7 @@ class _ContentScreenState extends State<ContentScreen> {
               'Author': (item) => item.author,
               'Created At': (item) => item.createdAt.toString(),
               'Email': (item) => item.email,
+
               'Mobile': (item) => item.mobileNumber,
             },
             onEdit: (item) => debugPrint('Edit ${item.title}'),
