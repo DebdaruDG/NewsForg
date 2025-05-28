@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
+import 'provider/content_details_helper_provider.dart';
 import 'routes/routes.dart';
+import 'package:provider/provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+          create: (_) => ContentDetailsAdditionalProvider(),
+        ),
+      ],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:newsforg_b2b_portal/utils/textstyles_constant.dart';
+import 'package:provider/provider.dart';
 
+import '../../../provider/content_details_helper_provider.dart';
 import '../../../utils/color_palette.dart';
+import '../../../utils/icon_constants.dart';
 import '../../../utils/widgets/generic_pop_up.dart';
 
 class ContentDetailsPage extends StatelessWidget {
@@ -11,101 +14,135 @@ class ContentDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final GlobalKey popupIconKey = GlobalKey();
 
-    return Container(
-      color: Colors.grey[100],
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Expanded(
-            child: SizedBox(
-              width: MediaQuery.of(context).size.width * 4 / 5,
-              child: Column(
-                children: [
-                  _appbar(
-                    context,
-                    "Exploring the Night Sky",
-                    "Published",
-                    popUpKey: popupIconKey,
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(16),
+    return Consumer<ContentDetailsAdditionalProvider>(
+      builder:
+          (_, provider, ___) => Container(
+            color: Colors.grey[100],
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width * 4 / 5,
                     child: Column(
                       children: [
-                        // Media Attachments
-                        SizedBox(
-                          height: 80,
-                          child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: [
-                              _mediaBox("assets/images/content_img_01.jpg"),
-                              const SizedBox(width: 8),
-                              _mediaBox("assets/images/content_img_02.jpg"),
-                              const SizedBox(width: 8),
-                              _mediaBox("assets/images/content_img_03.jpg"),
-                              const SizedBox(width: 8),
-                              _moreMediaBox("+3 more"),
-                            ],
-                          ),
+                        _appbar(
+                          context,
+                          "Exploring the Night Sky",
+                          "Published",
+                          popUpKey: popupIconKey,
                         ),
-                        const SizedBox(height: 24),
-
-                        // Description
-                        Container(
+                        Padding(
                           padding: const EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: const Text(
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
-                            "Vestibulum nec odio ipsum. Suspendisse cursus malesuada facilisis. "
-                            "Nunc consectetur facilisis tincidunt. Proin a leo nisi. Vivamus non convallis est.",
-                            style: TextStyle(fontSize: 16),
+                          child: Column(
+                            children: [
+                              // Media Attachments
+                              SizedBox(
+                                height: 80,
+                                child: ListView(
+                                  scrollDirection: Axis.horizontal,
+                                  children: [
+                                    _mediaBox(
+                                      "assets/images/content_img_01.jpg",
+                                    ),
+                                    const SizedBox(width: 8),
+                                    _mediaBox(
+                                      "assets/images/content_img_02.jpg",
+                                    ),
+                                    const SizedBox(width: 8),
+                                    _mediaBox(
+                                      "assets/images/content_img_03.jpg",
+                                    ),
+                                    const SizedBox(width: 8),
+                                    _moreMediaBox("+3 more"),
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 24),
+
+                              // Description
+                              Container(
+                                padding: const EdgeInsets.all(16),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                child: const Text(
+                                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+                                  "Vestibulum nec odio ipsum. Suspendisse cursus malesuada facilisis. "
+                                  "Nunc consectetur facilisis tincidunt. Proin a leo nisi. Vivamus non convallis est.",
+                                  style: TextStyle(fontSize: 16),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
                     ),
                   ),
-                ],
-              ),
-            ),
-          ),
-          Container(width: 1, color: Colors.grey[300]),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 1 / 5,
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Comments",
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      fontWeight: FontWeight.bold,
+                ),
+                Container(width: 1, color: Colors.grey[300]),
+                SizedBox(
+                  width:
+                      MediaQuery.of(context).size.width *
+                      (provider.showComments ? 0.225 : 0.075),
+                  child: Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        if (provider.showComments != true)
+                          IconButton(
+                            tooltip:
+                                provider.showComments
+                                    ? 'Hide Comments'
+                                    : 'Show Comments',
+                            icon: Icon(
+                              provider.showComments
+                                  ? Icons.comment_bank
+                                  : DashboardMaterialDesignIcons.comment,
+                            ),
+                            onPressed: () => provider.toggleCommentTab(),
+                          ),
+                        if (provider.showComments) ...[
+                          Row(
+                            children: [
+                              IconButton(
+                                tooltip: 'Hide Comments',
+                                icon: Icon(DashboardRemixIcons.arrowIconLeft),
+                                onPressed: () => provider.toggleCommentTab(),
+                              ),
+                              Text(
+                                "Comments",
+                                style: Theme.of(context).textTheme.titleMedium
+                                    ?.copyWith(fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 16),
+                          _commentItem(
+                            name: "Alice",
+                            comment: "This content is really insightful!",
+                            timeAgo: "2 hours ago",
+                          ),
+                          const SizedBox(height: 16),
+                          _commentItem(
+                            name: "Bob",
+                            comment: "Loved the breakdown of each concept.",
+                            timeAgo: "5 hours ago",
+                          ),
+                        ],
+                      ],
                     ),
                   ),
-                  const SizedBox(height: 16),
-                  _commentItem(
-                    "Alice",
-                    "This content is really insightful!",
-                    "2 hours ago",
-                  ),
-                  const SizedBox(height: 16),
-                  _commentItem(
-                    "Bob",
-                    "Loved the breakdown of each concept.",
-                    "5 hours ago",
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
           ),
-        ],
-      ),
     );
   }
 
@@ -129,7 +166,11 @@ class ContentDetailsPage extends StatelessWidget {
     );
   }
 
-  Widget _commentItem(String name, String comment, String timeAgo) {
+  Widget _commentItem({
+    required String name,
+    required String comment,
+    required String timeAgo,
+  }) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

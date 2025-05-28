@@ -98,6 +98,9 @@ class DashboardMaterialDesignIcons {
   static IconData get distribution => MdiIcons.send; // closest to outbox
   static IconData get userManagement => MdiIcons.accountGroupOutline;
   static IconData get roleManagement => MdiIcons.shieldAccountOutline;
+
+  //
+  static IconData get comment => MdiIcons.comment;
 }
 
 class DashboardRemixIcons {
@@ -127,4 +130,7 @@ class DashboardRemixIcons {
   // Nav Bar icons (Right side)
   static const IconData notification = RemixIcons.notification_4_line;
   static const IconData profileIcon = RemixIcons.user_line;
+
+  // Content Page (Right Side)
+  static const IconData arrowIconLeft = RemixIcons.arrow_left_fill;
 }
