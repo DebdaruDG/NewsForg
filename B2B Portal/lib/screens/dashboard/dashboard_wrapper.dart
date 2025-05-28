@@ -139,7 +139,7 @@ class _DashboardWrapperState extends State<DashboardWrapper> {
     double maxSidebarWidth,
     double collapsedSidebarWidth,
   ) => AnimatedContainer(
-    duration: const Duration(milliseconds: 500),
+    duration: const Duration(milliseconds: 350),
     width: _isSidebarExpanded ? maxSidebarWidth : collapsedSidebarWidth,
     decoration: BoxDecoration(
       color: DashboardColors.primaryWhite, // White inner background

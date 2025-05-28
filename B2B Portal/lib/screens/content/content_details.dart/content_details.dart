@@ -86,7 +86,8 @@ class ContentDetailsPage extends StatelessWidget {
                   ),
                 ),
                 Container(width: 1, color: Colors.grey[300]),
-                SizedBox(
+                AnimatedContainer(
+                  duration: const Duration(milliseconds: 350),
                   width:
                       MediaQuery.of(context).size.width *
                       (provider.showComments ? 0.225 : 0.075),
