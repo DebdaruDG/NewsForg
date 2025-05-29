@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../../../model/comment_model.dart';
 import '../../../provider/content_details_helper_provider.dart';
+import '../../../utils/article_richtext_editor/richtext_editor_for_article.dart';
 import '../../../utils/color_palette.dart';
 import '../../../utils/icon_constants.dart';
 import '../../../utils/widgets/generic_pop_up.dart';
@@ -71,12 +72,13 @@ class ContentDetailsPage extends StatelessWidget {
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(12),
                                 ),
-                                child: const Text(
-                                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
-                                  "Vestibulum nec odio ipsum. Suspendisse cursus malesuada facilisis. "
-                                  "Nunc consectetur facilisis tincidunt. Proin a leo nisi. Vivamus non convallis est.",
-                                  style: TextStyle(fontSize: 16),
-                                ),
+                                child: ArticleEditor(),
+                                // const Text(
+                                //   "Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+                                //   "Vestibulum nec odio ipsum. Suspendisse cursus malesuada facilisis. "
+                                //   "Nunc consectetur facilisis tincidunt. Proin a leo nisi. Vivamus non convallis est.",
+                                //   style: TextStyle(fontSize: 16),
+                                // ),
                               ),
                             ],
                           ),
